@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Videos from 'Videos';
 import Readings from 'Readings';
 import Exercises from 'Exercises';
