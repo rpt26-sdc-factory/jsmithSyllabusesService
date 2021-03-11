@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-const Exercise = () => {
+const Exercise = (props) => {
   return (
-    <div className="exercise">Render an exercise.</div>
+    <div className="exercise">
+      {`${props.exercise.title} ${props.exercise.exerciseLengthMinutes}m`}
+    </div>
   );
 };
 

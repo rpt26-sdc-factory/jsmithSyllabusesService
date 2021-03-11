@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
-import Videos from 'Videos';
-import Readings from 'Readings';
-import Exercises from 'Exercises';
+import Lesson from 'Lesson';
 
-const Week = () => {
+const Week = (props) => {
   return (
-    <div className="week">Render Videos, Readings, and Exercises for this week</div>
+    <div className="week">
+      <div className="week-literal">
+        WEEK
+      </div>
+      <div className="week-number">
+        {props.weekData.weekNumber}
+      </div>
+      <div className="lessons">
+        {props.weekData.map((lesson, index) => {
+          return <Lessons svgsData={props.svgsData} lessonsData={lesson} key={'lessons'.concat(props.weekNumber, index)} lessonNumber={index + 1}/>;
+        })}
+    </div>
+    </div >
   );
 };
 
