@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import Syllabus from './components/Syllabus.jsx';
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<Syllabus />, document.getElementById('syllabus'));

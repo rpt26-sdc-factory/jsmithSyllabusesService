@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const syllabusesSchema = require('./seed/schemas/syllabusesSchema');
+const syllabusesSchema = require('./syllabusesSchema');
 
 mongoose.connect('mongodb://localhost/syllabuses', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
