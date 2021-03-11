@@ -1,6 +1,7 @@
 import React from "react";
 import Lesson from 'Lesson';
 
+// renders week number and all lessons for a week
 const Week = (props) => {
   return (
     <div className="week">

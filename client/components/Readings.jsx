@@ -1,6 +1,7 @@
 import React from "react";
 import Reading from 'Reading';
 
+//render example: 9 readings
 const Readings = (props) => {
   return (
     <div className="readings">

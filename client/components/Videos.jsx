@@ -1,6 +1,7 @@
 import React from "react";
 import Video from 'Video';
 
+//render example: 5 videos
 const Videos = (props) => {
   return (
     <div className="videos">

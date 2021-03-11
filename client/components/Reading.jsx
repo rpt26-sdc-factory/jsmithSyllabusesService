@@ -1,5 +1,6 @@
 import React from "react";
 
+//render example: Welcome to Machine Learning! 1m
 const Reading = (props) => {
   return (
     <div className="reading">

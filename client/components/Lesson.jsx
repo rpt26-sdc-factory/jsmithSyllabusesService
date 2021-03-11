@@ -3,12 +3,14 @@ import Videos from 'Videos';
 import Readings from 'Readings';
 import Exercises from 'Exercises';
 
+//renders a lesson's title, description, videos, readings, and exercises.
 const Lesson = (props) => {
   let videosText = props.lesson.videos.length === 1 ? 'video' : 'videos';
   let readingsText = props.lesson.readings.length === 1 ? 'reading' : 'readings';
   let exercisesText = props.lesson.exercises.length === 1 ? 'quiz' : 'quizzes';
   let seeAllId = "lesson".concat(props.lessonNumber);
 
+  //for conditional rendering of videos, readings, and exercises components
   let seeAllClickHandler = () => {
     let elem = document.getElementById(seeAllId);
     elem.style.display = elem.style.display === 'none' ? 'block' : 'none';

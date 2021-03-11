@@ -1,6 +1,7 @@
 import React from "react";
 import Week from 'Week';
 
+//renders all weeks
 const Weeks = (props) => {
   return (
     <div className="weeks">

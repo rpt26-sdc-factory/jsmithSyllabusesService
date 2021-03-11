@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Weeks from 'Weeks';
 
+//renders a syllabus for a course
 const Syllabus = () => {
   const syllabusPort = 3005;
   const imagesPort = 3006;
