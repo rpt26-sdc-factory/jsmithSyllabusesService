@@ -17,16 +17,27 @@
 
 ## Usage
 
-> Some usage instructions
+>
 
 ## Requirements
 
-An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
-
-- Node 6.13.0
-- etc
-
 ## Development
+
+>The component flow goes...
+
+>Syllabus ->
+
+>Weeks ->
+
+>Week ->
+
+>Lesson =>
+
+>        Videos => Video
+>        Readings => Reading
+>        Exercises => Exercise
+
+Each course has a syllabus.  Each syllabus has one or more weeks.  Each week has one or more lessons.  Each lesson has one or more videos, readings, and exercises.
 
 ### Installing Dependencies
 
