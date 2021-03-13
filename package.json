@@ -8,20 +8,30 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "start": "node server/index.js",
-    "react-dev": "webpack"
+    "start": "nodemon server/index.js",
+    "react-dev": "webpack --watch"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.11.19"
+    "mongoose": "^5.11.19",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "@babel/preset-env": "^7.13.10",
     "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.1.2",
+    "eslint": "^7.21.0",
     "eslint-config-hackreactor": "^1.0.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.3",
     "nodemon": "^2.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "style-loader": "^2.0.0",
     "webpack": "^5.24.4",
     "webpack-cli": "^4.5.0"
   }

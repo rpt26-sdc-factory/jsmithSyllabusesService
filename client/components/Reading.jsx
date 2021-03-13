@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 //render example: Welcome to Machine Learning! 1m
 const Reading = (props) => {
   return (
     <div className="reading">
-      {`${props.reading.title} ${props.reading.readingLengthMinutes}m`}
+      {`${props.readingData.readingTitle} ${props.readingData.readingLengthMinutes}m`}
     </div>
   );
 };

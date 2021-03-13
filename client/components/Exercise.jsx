@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 
 //render example: Octave/Matlab Tutorial 30m
 const Exercise = (props) => {
   return (
-    <div className="exercise">
-      {`${props.exercise.title} ${props.exercise.exerciseLengthMinutes}m`}
+    <div className="exercise svg">
+      {`${props.exerciseData.exerciseTitle} ${props.exerciseData.exerciseLengthMinutes}m`}
     </div>
   );
 };

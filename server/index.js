@@ -1,12 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const db = require('../db/index.js');
+const path = require('path');
 const app = express();
 const port = 3005;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
+
+app.get('/:courseNumber', (req, res) => {
+  res.sendFile(path.resolve('./public/index.html'));
+});
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
   db.hoursToComplete(req.params.courseNumber, (responseData) => {
@@ -21,5 +26,5 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Syllabuses service listening at http://localhost:${port}`);
+  console.log(`Syllabus service listening at http://localhost:${port}`);
 });

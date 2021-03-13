@@ -1,0 +1,62 @@
+body {
+  color: black;
+  background-color: white;
+  font-family: Open Sans;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 700;
+  line-height: 26.4px;
+}
+
+.svg {
+  background-color: white;
+  height: 60px;
+  width: 48px;
+}
+
+.hidden {
+  display: none;
+}
+
+.syllabus-title {
+  text-align: center;
+}
+
+.week {
+
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.week-literal {
+  float: left;
+  letter-spacing: 10px;
+}
+
+.rating {
+  font-size: 10px;
+}
+
+.rating-thumb {
+  fill: #F7BB56;
+  height: 15px;
+  width: 15px;
+}
+
+.rating-info {
+  height: 15px;
+  width: 15px;
+}
+
+.lesson-materials .lesson-name {
+  width: 100%;
+  margin: 15px;
+  padding: 15px;
+}
+
+/* top, right, bottom, left */
+.lessons {
+  float: left;
+  padding: 15px 15px, 15px, 45px;
+}

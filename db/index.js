@@ -1,19 +1,48 @@
 const mongoose = require('mongoose');
-const syllabusesSchema = require('./syllabusesSchema');
 
 mongoose.connect('mongodb://localhost/syllabuses', {useNewUrlParser: true, useUnifiedTopology: true});
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('db connection opened');
+  console.log('Syllabus service db connection opened');
 });
 
-const Syllabuses = mongoose.model('syllabuses', syllabusesSchema);
+const syllabusSchema = new mongoose.Schema({
+  id: Number,
+  weeks: [{
+    weekNumber: Number,
+    hoursToCompleteWeek: Number,
+    title: String,
+    description: String,
+    videos: [{
+      videoIndex: Number,
+      videoTitle: String,
+      videoLengthMinutes: Number,
+      videoLengthSeconds: Number
+    }],
+    videosLength: Number,
+    readings: [{
+      readingIndex: Number,
+      readingTitle: String,
+      readingLengthMinutes: Number
+    }],
+    readingsLength: Number,
+    exercises: [{
+      exerciseIndex: Number,
+      exerciseTitle: String,
+      exerciseLengthMinutes: String
+    }],
+    exercisesLength: Number
+  }]
+});
+
+const Syllabuses = mongoose.model('syllabuses', syllabusSchema);
 
 module.exports.hoursToComplete = (courseNumber, cb) => {
   Syllabuses.findOne({ id: courseNumber })
     .then((syllabusData) => {
-      cb({ hoursToComplete: syllabusData.hoursToCompleteCourse });
+      let hoursToCompleteCourse = syllabusData.toObject().hoursToCompleteCourse;
+      cb({ hoursToCompleteCourse });
     })
     .catch((err) => {
       if (err) {
@@ -23,8 +52,11 @@ module.exports.hoursToComplete = (courseNumber, cb) => {
 };
 
 module.exports.syllabus = (courseNumber, cb) => {
-  Syllabuses.findOne({ id: courseNumber })
+  const options = {id: courseNumber};
+  // console.log(options);
+  Syllabuses.findOne(options)
     .then((syllabusData) => {
+      // console.log('syllabusData in db.syllabus: ', syllabusData);
       cb(syllabusData);
     })
     .catch((err) => {
