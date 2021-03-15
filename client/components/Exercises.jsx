@@ -19,7 +19,7 @@ const Exercises = (props) => (
     {props.exercisesData.map((exercise, index) => {
       return <Exercise exerciseData={exercise} key={'exercise'.concat(props.lessonNumber), index} />;
     })}
-    <hr />
+    <hr className="exercise-divider" />
   </div>
 
 );

@@ -9,12 +9,17 @@ body {
   line-height: 26.4px;
 }
 
+.syllabus {
+  margin-top: 65px;
+}
+
 .syllabus-title {
+  font-size: 24px;
   text-align: center;
 }
 
 .rating {
-  font-size: 11px;
+  font-size: 14px;
   letter-spacing: .25px;
 }
 
@@ -45,6 +50,10 @@ body {
   font-weight: 500;
 }
 
+.weeks {
+  margin-top: 70px;
+}
+
 .week-title {
   padding-top: 15px;
   padding-left: 35px;
@@ -53,15 +62,15 @@ body {
 }
 
 .week-literal {
-  font-size: 10px;
+  font-size: 0.875rem;;
   float: left;
   letter-spacing: 4px;
 }
 
 .week-number {
-  margin-top: 15px;
+  margin-top: 40px;
   margin-left: 10px;
-  font-size: 33px;
+  font-size: 3.75rem;
   font-weight: lighter;
 }
 
@@ -78,7 +87,7 @@ body {
 }
 
 .lesson-hours-text {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.5rem;
   font-weight: bold;
   color: #6e767f;
@@ -87,10 +96,9 @@ body {
 .lesson-hours {
   display: grid;
   grid-template-columns: 50px 750px;
-  margin-top: 35px;
+
 
 }
-
 
 .lesson-materials .lesson-name {
   width: 100%;
@@ -99,22 +107,22 @@ body {
 }
 
 .lesson-name {
-  margin-top: 10px;
+  margin-top: 25px;
   margin-bottom: 18px;
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: 700;
+  font-size: 20px;
 }
 
 .lesson-materials {
   display: grid;
-  grid-template-columns: 50px 350px 100px;
-  margin-top: 30px;
-  margin-bottom: 30px;
+  grid-template-columns: 50px 300px 150px;
+  margin-top: 35px;
+  margin-bottom: 40px;
 
 }
 
 .lesson-materials-text {
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   line-height: 1.5rem;
   font-weight: 500;
   color: #6e767f;
@@ -133,50 +141,58 @@ body {
 .lesson-description {
   color: #373a3c;
   line-height: 1.5;
-  font-size: .75rem;
+  font-size: 14px;
+}
+
+.orange-circle, .blue-circle {
+  height: 40px;
+  width: 40px;
+  line-height: 40px;
+  -moz-border-radius: 30px; /* or 50% */
+  border-radius: 30px; /* or 50% */
+  border-radius: 50%; /* or 50% */
+  margin-top: -12px;
+
 }
 
 .orange-circle {
-  height: 30px;
-  width: 30px;
-  line-height: 40px;
-
-  -moz-border-radius: 30px; /* or 50% */
-  border-radius: 30px; /* or 50% */
   background-image: linear-gradient(
     90deg
     , rgb(252, 110, 81), rgb(246, 187, 66));
-  border-radius: 30px; /* or 50% */
 }
 
 .blue-circle {
-  height: 30px;
-  width: 30px;
-  line-height: 40px;
-
-  -moz-border-radius: 30px; /* or 50% */
-  border-radius: 30px; /* or 50% */
   background-image: linear-gradient(
     90deg
     , rgb(72, 207, 173), rgb(59, 175, 218));
-  border-radius: 30px; /* or 50% */
 }
+
 .circle-svg {
   fill: white;
-  height: 15px;
-  width: 15px;
+  height: 20px;
+  width: 20px;
   position: relative;
-  margin-left: 8px;
-  margin-bottom: 2px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .plain-svg {
   height: 20px;
   width: 20px;
+  position: relative;
+  transform: translateY(10%);
 }
 
 .videos {
-  margin-top: 15px;
+  margin-top: -40px;
+}
+
+.readings {
+  margin-top: 20px;
+}
+
+.exercises {
+  margin-top: 20px;
 }
 .videos-svg {
   fill: #2A73CC;
@@ -185,6 +201,9 @@ body {
 .readings-svg {
   fill: #1F8354;
 }
+.exercises-svg {
+  fill: #0156B8;
+}
 
 .videos-count, .readings-count, .exercises-count {
   display: grid;
@@ -192,16 +211,18 @@ body {
 }
 
 .videos-count-text, .readings-count-text, .exercises-count-text {
-  font-size: 12px;
+  font-size: 0.875rem;
   font-weight: 700;
+  margin-bottom: 10px;
 }
 
 .video, .reading, .exercise {
   margin-top: 10px;
-  font-size: 12px;
-
-  font-weight: 200;
+  margin-bottom: 20px;
+  font-size: 0.875rem;
+  font-weight: normal;
 }
+
 .hidden {
   display: none;
 }
@@ -213,6 +234,14 @@ hr {
   width: 100%
 }
 
-.syllabus {
-  margin-top: 45px;
+.lesson-divider {
+  margin-bottom: 60px;
+}
+
+.exercise-divider {
+  margin-bottom: 60px;
+}
+
+.divider {
+  margin-bottom: 55px;
 }

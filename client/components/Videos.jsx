@@ -6,7 +6,6 @@ const Videos = (props) => {
   return (
     <div className="videos">
       <div className="videos-count">
-
         <div className="videos-svg plain-svg">
           <svg viewBox="0 0 48 48">
             <path d={props.svgsData.videosSVG}></path>
@@ -14,7 +13,6 @@ const Videos = (props) => {
         </div>
         <div className="videos-count-text">
           {`${props.videosData.length} ${props.videosText}`}
-
         </div>
       </div>
       {props.videosData.map((video, index) => {

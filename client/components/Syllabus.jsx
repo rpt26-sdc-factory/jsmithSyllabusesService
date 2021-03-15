@@ -90,12 +90,11 @@ class Syllabus extends React.Component {
             <br />
             <span className="rating">
               {'Content Rating'}
-              {/* <svg className="rating-thumb"> */}
               <svg className="rating-thumb" viewBox="0 0 48 48" ><title id="ThumbsUp950e403d-06ae-447e-9ee4-e5ace52d6cd2">Thumbs Up</title>
                 <path d={this.state.svgsData.thumbSVG}></path>
               </svg>
-              <span className="rating-percentage">{this.state.positiveReviews}</span>
-              <span className="rating-number">{`(${this.state.reviewCount} ratings)`}</span>
+              <span>{this.state.positiveReviews}</span>
+              <span>{`(${this.state.reviewCount} ratings)`}</span>
               <span className="rating-info">
                 <svg className="rating-info"viewBox="0 0 48 48" ><title>Info</title>
                   <path d={this.state.svgsData.infoSVG.i}></path>
@@ -105,7 +104,7 @@ class Syllabus extends React.Component {
               </span>
             </span>
           </div>
-          <div className="syllabus-week">
+          <div>
             <Weeks svgsData={this.state.svgsData} syllabusData={this.state.syllabusData} />
           </div>
         </div>
