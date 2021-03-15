@@ -96,7 +96,7 @@ class Syllabus extends React.Component {
               </svg>
               <span className="rating-percentage">{this.state.positiveReviews}</span>
               <span className="rating-number">{`(${this.state.reviewCount} ratings)`}</span>
-              <span className="rating-info svg">
+              <span className="rating-info">
                 <svg className="rating-info"viewBox="0 0 48 48" ><title>Info</title>
                   <path d={this.state.svgsData.infoSVG.i}></path>
                   <path d={this.state.svgsData.infoSVG.dot}></path>

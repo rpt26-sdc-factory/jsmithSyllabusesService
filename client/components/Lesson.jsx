@@ -25,11 +25,18 @@ const Lesson = (props) => {
   return (
     <div className="lesson">
       <div className="lesson-hours">
-        <div className="lesson-hours-clock svg">
-          <svg viewBox="0 0 48 48">
-            <path d={props.svgsData.hoursSVG}></path>
-          </svg>
+        <div className="orange-circle">
+
+          <div className="lesson-hours-clock">
+            <svg viewBox="0 0 48 48" className="circle-svg">
+              <path d={props.svgsData.hoursSVG}></path>
+            </svg>
+          </div>
         </div>
+        <div className="lesson-hours-text">
+          {`${props.lessonData.hoursToCompleteLesson} hours to complete`}
+        </div>
+
       </div>
       <div className="lesson-name">
         {props.lessonData.lessonTitle}
@@ -38,19 +45,27 @@ const Lesson = (props) => {
         {props.lessonData.lessonDescription}
       </div>
       <div className="lesson-materials">
-        <div className="lesson-materials-readings-svg svg">
-          <svg viewBox="0 0 48 48">
+
+        <div className="blue-circle">
+
+          <svg viewBox="0 0 48 48" className="circle-svg">
             <path d={props.svgsData.readingsSVG}></path>
           </svg>
-        </div>
-        {`${props.lessonData.videos.length} ${videosText} (Total ${props.lessonData.videosLength} min), ${props.lessonData.readings.length} ${readingsText} ${props.lessonData.exercises.length} ${exercisesText}`}
-        <button id={seeAllButtonId} onClick={seeAllClickHandler}>{buttonText}</button>
 
-        <div id={seeAllId} className="hidden">
-          <Videos videosData={props.lessonData.videos} svgsData={props.svgsData} videosText={videosText} lessonNumber={props.lessonNumber} />
-          <Readings readingsData={props.lessonData.readings} svgsData={props.svgsData} readingsText={readingsText} lessonNumber={props.lessonNumber} />
-          <Exercises exercisesData={props.lessonData.exercises} svgsData={props.svgsData} exercisesText={exercisesText} lessonNumber={props.lessonNumber} />
         </div>
+        <div className="lesson-materials-text">
+
+          {`${props.lessonData.videos.length} ${videosText} (Total ${props.lessonData.videosLength} min), ${props.lessonData.readings.length} ${readingsText} ${props.lessonData.exercises.length} ${exercisesText}`}
+          <button className="see-all-button" id={seeAllButtonId} onClick={seeAllClickHandler}>{buttonText}</button>
+        </div>
+
+      </div>
+      <hr />
+      <div id={seeAllId} className="hidden">
+        <Videos videosData={props.lessonData.videos} svgsData={props.svgsData} videosText={videosText} lessonNumber={props.lessonNumber} />
+        <Readings readingsData={props.lessonData.readings} svgsData={props.svgsData} readingsText={readingsText} lessonNumber={props.lessonNumber} />
+        <Exercises exercisesData={props.lessonData.exercises} svgsData={props.svgsData} exercisesText={exercisesText} lessonNumber={props.lessonNumber} />
+
       </div>
     </div >
   );

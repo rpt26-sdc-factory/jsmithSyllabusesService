@@ -11,11 +11,15 @@ const Week = (props) => {
 
   return (
     <div className="week">
-      <div className="week-literal">
+      <div className="week-title">
+
+        <div className="week-literal">
         WEEK
-      </div>
-      <div className="week-number week-literal">
-        {props.weekData.weekNumber}
+        </div>
+        <br />
+        <div className="week-number week-literal">
+          {props.weekData.weekNumber}
+        </div>
       </div>
       <div className="lessons">
         {props.weekData.lessons.map((lesson, index) => {
