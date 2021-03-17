@@ -5,7 +5,8 @@ import Exercises from './Exercises.jsx';
 
 //renders a lesson's title, description, videos, readings, and exercises.
 const Lesson = (props) => {
-  console.log('props: ', props);
+  props = props.children; //Jest won't run without this?!?!
+
   let videosText = props.lessonData.videos.length === 1 ? 'video' : 'videos';
   let readingsText = props.lessonData.readings.length === 1 ? 'reading' : 'readings';
   let exercisesText = props.lessonData.exercises.length === 1 ? 'quiz' : 'quizzes';
