@@ -21,6 +21,7 @@
 1. [Development](#development)
 
 ## Usage
+> npm install
 
 > Generate Syllabuses data with "npm run generate"
 

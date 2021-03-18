@@ -3,16 +3,9 @@ import Lesson from './Lesson.jsx';
 
 // renders week number and all lessons for a week
 const Week = (props) => {
-  // console.log('props.weekData: ', props.weekData);
-
-
-  // let weekData = Array.isArray(props.weekData) ? props.weekData : [];
-  // console.log('weekData: ', weekData);
-
   return (
     <div className="week">
       <div className="week-title">
-
         <div className="week-literal">
         WEEK
         </div>

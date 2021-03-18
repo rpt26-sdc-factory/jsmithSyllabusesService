@@ -9,12 +9,10 @@ class Syllabus extends React.Component {
     this.state = state;
     this.syllabusController = new AbortController();
     this.imagesController = new AbortController();
-
   }
 
   //sets initial state, then sets courseNumber from window, then fetches data
   componentDidMount() {
-
     this.setState({courseNumber: window.location.pathname.split('/')[1]}, () => {
       const syllabusOptions = {
         signal: this.syllabusController.signal,
@@ -77,7 +75,6 @@ class Syllabus extends React.Component {
   }
 
   componentWillUnmount () {
-    console.log('unmounting');
     this.syllabusController.abort();
   }
 
@@ -85,6 +82,7 @@ class Syllabus extends React.Component {
     if (this.state.svgsData) {
       return (
         <div className="syllabus">
+          <a name="syllabus"></a>
           <div className="syllabus-title">
             {'Syllabus - What you will learn from this course'}
             <br />

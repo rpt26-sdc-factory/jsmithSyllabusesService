@@ -5,17 +5,15 @@ import Exercises from './Exercises.jsx';
 
 //renders a lesson's title, description, videos, readings, and exercises.
 const Lesson = (props) => {
-  props = props.children; //Jest won't run without this?!?!
-
   let videosText = props.lessonData.videos.length === 1 ? 'video' : 'videos';
   let readingsText = props.lessonData.readings.length === 1 ? 'reading' : 'readings';
   let exercisesText = props.lessonData.exercises.length === 1 ? 'quiz' : 'quizzes';
   let seeAllId = 'lesson'.concat(props.lessonNumber);
   let seeAllButtonId = seeAllId.concat('button');
   let buttonText = 'SEE ALL';
+
   //shows/hides Videos, Readings, Exercises
   let seeAllClickHandler = () => {
-    console.log('seeAllId: ', seeAllId);
     let elem = document.getElementById(seeAllId);
     elem.style.display = elem.style.display === 'block' ? 'none' : 'block';
     buttonText = buttonText === 'SEE ALL' ? 'SEE LESS' : 'SEE ALL';

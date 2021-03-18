@@ -7,8 +7,8 @@ const syllabusesSchema = new Schema({
     weekNumber: Number,
     lessons: [{
       hoursToCompleteLesson: Number,
-      title: String,
-      description: String,
+      lessonTitle: String,
+      lessonDescription: String,
       videos: [{
         videoIndex: Number,
         videoTitle: String,
@@ -25,10 +25,12 @@ const syllabusesSchema = new Schema({
       exercises: [{
         exerciseIndex: Number,
         exerciseTitle: String,
-        exerciseLengthMinutes: String
+        exerciseLengthMinutes: Number
       }],
       exercisesLength: Number
-    }]
-  }],
-  hoursToCompleteCourse: Number
+    }],
+    hoursToCompleteCourse: Number
+  }]
 });
+
+module.exports = syllabusesSchema;

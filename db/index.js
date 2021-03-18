@@ -53,10 +53,8 @@ module.exports.hoursToComplete = (courseNumber, cb) => {
 
 module.exports.syllabus = (courseNumber, cb) => {
   const options = {id: courseNumber};
-  // console.log(options);
   Syllabuses.findOne(options)
     .then((syllabusData) => {
-      // console.log('syllabusData in db.syllabus: ', syllabusData);
       cb(syllabusData);
     })
     .catch((err) => {
