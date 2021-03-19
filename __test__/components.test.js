@@ -5,9 +5,10 @@ import userEvent from '@testing-library/user-event';
 import Syllabus from '../client/components/Syllabus';
 import Lesson from '../client/components/Lesson';
 import { enableFetchMocks } from 'jest-fetch-mock';
-enableFetchMocks();
 import { syllabusData, svgs } from './test-data';
 import { unmountComponentAtNode } from 'react-dom';
+
+enableFetchMocks();
 
 // setup a new DOM element as a render target
 let container = null;
@@ -29,7 +30,6 @@ describe('Addition', () => {
   });
 });
 
-
 describe('Syllabus', () => {
   let svgsData = svgs;
   let lessonData = syllabusData.weeks[0].lessons[0];
@@ -50,9 +50,7 @@ describe('Syllabus', () => {
   });
 
   test('SEE ALL button changes its text when clicked', () => {
-
     render(<Lesson svgsData={svgsData} lessonData={lessonData} key={key} lessonNumber={lessonNumber} />);
-
     let seeAll = screen.queryByText('SEE ALL');
     let seeLess = screen.queryByText('SEE LESS');
     expect(seeAll).toBeDefined();
