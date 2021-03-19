@@ -1,62 +1,551 @@
 module.exports = {
 
-  lesson:
-    {
-      'hoursToCompleteLesson': 6,
-      'lessonTitle': 'Ethics of TotalHealthup',
-      'lessonDescription': 'Totam dolores ea illo suscipit id. Rem molestiae aperiam sequi dolorum enim atque amet assumenda voluptatibus. Voluptas deleniti et veritatis. Quaerat voluptas maiores vel nostrum odit deleniti voluptas. Cum porro quia ut qui qui. Aperiam quibusdam nisi iste vero quas sapiente dolor rerum.',
-      'videos': [
-        {
-          'videoIndex': 0,
-          'videoTitle': 'Re-contextualized navigate monitor',
-          'videoLengthMinutes': 70,
-          'videoLengthSeconds': 6
-        },
-        {
-          'videoIndex': 1,
-          'videoTitle': 'Seamless navigate monitor',
-          'videoLengthMinutes': 46,
-          'videoLengthSeconds': 38
-        }
-      ],
-      'videosLength': 116,
-      'readings': [
-        {
-          'readingIndex': 0,
-          'readingTitle': 'initiatives Account connect',
-          'readingLengthMinutes': 16
-        },
-        {
-          'readingIndex': 1,
-          'readingTitle': 'Forward B2C communities',
-          'readingLengthMinutes': 1
-        },
-        {
-          'readingIndex': 2,
-          'readingTitle': 'e-commerce Sausages bandwidth',
-          'readingLengthMinutes': 55
-        }
-      ],
-      'readingsLength': 72,
-      'exercises': [
-        {
-          'exerciseIndex': 0,
-          'exerciseTitle': 'What is  input wireless port',
-          'exerciseLengthMinutes': 29
-        },
-        {
-          'exerciseIndex': 1,
-          'exerciseTitle': 'Building  copy digital transmitter',
-          'exerciseLengthMinutes': 63
-        },
-        {
-          'exerciseIndex': 2,
-          'exerciseTitle': 'Steps to  navigate digital matrix',
-          'exerciseLengthMinutes': 72
-        }
-      ],
-      'exercisesLength': 164
-    },
+  syllabusData: {
+    'id': 1,
+    'weeks': [
+      {
+        'weekNumber': 1,
+        'lessons': [
+          {
+            'hoursToCompleteLesson': 6,
+            'lessonTitle': 'Ethics of Liaison open-source',
+            'lessonDescription': 'Omnis quos eaque praesentium eligendi. Ex laborum corporis id voluptatibus sit architecto dignissimos quod quas. Dolor rerum fugiat eos minima est. Maiores unde pariatur ut et voluptas adipisci odit necessitatibus.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Synchronised reboot interface',
+                'videoLengthMinutes': 70,
+                'videoLengthSeconds': 35
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Diverse back up port',
+                'videoLengthMinutes': 46,
+                'videoLengthSeconds': 15
+              },
+              {
+                'videoIndex': 2,
+                'videoTitle': 'Exclusive quantify monitor',
+                'videoLengthMinutes': 59,
+                'videoLengthSeconds': 28
+              }
+            ],
+            'videosLength': 176,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Global Tasty',
+                'readingLengthMinutes': 16
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'bluetooth mission-critical',
+                'readingLengthMinutes': 59
+              }
+            ],
+            'readingsLength': 75,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Skills for hack wireless sensor',
+                'exerciseLengthMinutes': 62
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'Basics of copy virtual capacitor',
+                'exerciseLengthMinutes': 48
+              }
+            ],
+            'exercisesLength': 110
+          },
+          {
+            'hoursToCompleteLesson': 4,
+            'lessonTitle': 'Steps to Consultant hack Robust fuchsia teal',
+            'lessonDescription': 'Dolorem reprehenderit ipsum rerum nam. Facere veniam ut. Deleniti error provident et maiores velit. Eum ut vitae aut omnis eum quibusdam rerum. Sit dignissimos enim doloribus.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Customer-focused calculate alarm',
+                'videoLengthMinutes': 74,
+                'videoLengthSeconds': 38
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Cross-platform reboot bus',
+                'videoLengthMinutes': 76,
+                'videoLengthSeconds': 28
+              },
+              {
+                'videoIndex': 2,
+                'videoTitle': 'Versatile input monitor',
+                'videoLengthMinutes': 2,
+                'videoLengthSeconds': 10
+              }
+            ],
+            'videosLength': 153,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Marketing productivity synthesizing Jordan firewall',
+                'readingLengthMinutes': 35
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'Books Frozen parse multi-byte Gateway',
+                'readingLengthMinutes': 3
+              },
+              {
+                'readingIndex': 2,
+                'readingTitle': 'PCI deposit withdrawal payment open-source',
+                'readingLengthMinutes': 42
+              }
+            ],
+            'readingsLength': 80,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Skills for calculate 1080p panel',
+                'exerciseLengthMinutes': 12
+              }
+            ],
+            'exercisesLength': 12
+          },
+          {
+            'hoursToCompleteLesson': 4,
+            'lessonTitle': 'Basics of Orchestrator Granite morph',
+            'lessonDescription': 'Similique et quos voluptate inventore consequuntur dicta ut reprehenderit. Eum voluptates aspernatur vitae molestiae deserunt et tempora et. Voluptatem ut omnis illum commodi. Nihil tempore repudiandae inventore voluptate eos velit. Cupiditate cupiditate ipsam sed impedit ex minima.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Open-source back up interface',
+                'videoLengthMinutes': 67,
+                'videoLengthSeconds': 33
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Object-based input monitor',
+                'videoLengthMinutes': 20,
+                'videoLengthSeconds': 42
+              },
+              {
+                'videoIndex': 2,
+                'videoTitle': 'Configurable connect system',
+                'videoLengthMinutes': 30,
+                'videoLengthSeconds': 39
+              }
+            ],
+            'videosLength': 118,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Belgium invoice Brand',
+                'readingLengthMinutes': 46
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'silver Kids Macao',
+                'readingLengthMinutes': 32
+              },
+              {
+                'readingIndex': 2,
+                'readingTitle': 'Montana Tasty Handcrafted',
+                'readingLengthMinutes': 14
+              }
+            ],
+            'readingsLength': 92,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Steps to compress back-end array',
+                'exerciseLengthMinutes': 48
+              }
+            ],
+            'exercisesLength': 48
+          }
+        ]
+      },
+      {
+        'weekNumber': 2,
+        'lessons': [
+          {
+            'hoursToCompleteLesson': 7,
+            'lessonTitle': 'Ethics of Creek drive',
+            'lessonDescription': 'Aut modi perferendis commodi est veritatis officiis temporibus. Aut odit debitis qui laboriosam quia. Exercitationem et quis at cumque consequuntur. Ea itaque libero quibusdam ut repellendus. Deleniti alias ut vel nihil quidem explicabo.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Programmable compress firewall',
+                'videoLengthMinutes': 45,
+                'videoLengthSeconds': 54
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Versatile synthesize bus',
+                'videoLengthMinutes': 88,
+                'videoLengthSeconds': 31
+              }
+            ],
+            'videosLength': 134,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'benchmark GB',
+                'readingLengthMinutes': 40
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'Public-key Dalasi',
+                'readingLengthMinutes': 62
+              }
+            ],
+            'readingsLength': 102,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Types of back up bluetooth system',
+                'exerciseLengthMinutes': 55
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'Skills for connect optical system',
+                'exerciseLengthMinutes': 51
+              },
+              {
+                'exerciseIndex': 2,
+                'exerciseTitle': 'Steps to bypass wireless matrix',
+                'exerciseLengthMinutes': 68
+              },
+              {
+                'exerciseIndex': 3,
+                'exerciseTitle': 'Types of back up neural firewall',
+                'exerciseLengthMinutes': 35
+              }
+            ],
+            'exercisesLength': 209
+          },
+          {
+            'hoursToCompleteLesson': 5,
+            'lessonTitle': 'Basics of back-end Planner Idaho Division Avenue',
+            'lessonDescription': 'Error amet atque et culpa. Rem quo ea voluptatem qui voluptas ipsam explicabo voluptatum aut. A cumque excepturi illum nesciunt ut voluptatem iste temporibus. Rerum animi aut aut vel ducimus aut.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Total quantify matrix',
+                'videoLengthMinutes': 90,
+                'videoLengthSeconds': 29
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Optional copy interface',
+                'videoLengthMinutes': 30,
+                'videoLengthSeconds': 48
+              }
+            ],
+            'videosLength': 121,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'cross-platform Health Intranet quantify Jersey',
+                'readingLengthMinutes': 74
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'Operations Lesotho whiteboard neural Iranian',
+                'readingLengthMinutes': 65
+              }
+            ],
+            'readingsLength': 139,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Building compress wireless firewall',
+                'exerciseLengthMinutes': 60
+              }
+            ],
+            'exercisesLength': 60
+          },
+          {
+            'hoursToCompleteLesson': 4,
+            'lessonTitle': 'Ethics of generating Avon Fresh Burundi',
+            'lessonDescription': 'Voluptates est sed quidem voluptas sit aspernatur. Ut dolorum et sequi accusantium laudantium aut placeat. Commodi dolorum odio sit animi tempore vel expedita optio. Ducimus odit rerum nesciunt tempore pariatur odit aut eaque. Aut aliquid dolore illum.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Face to face reboot matrix',
+                'videoLengthMinutes': 47,
+                'videoLengthSeconds': 35
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Future-proofed synthesize capacitor',
+                'videoLengthMinutes': 49,
+                'videoLengthSeconds': 19
+              }
+            ],
+            'videosLength': 96,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Hat Liaison ivory AI',
+                'readingLengthMinutes': 14
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'Berkshire capacitor Chicken Soap',
+                'readingLengthMinutes': 71
+              }
+            ],
+            'readingsLength': 85,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Steps to bypass neural circuit',
+                'exerciseLengthMinutes': 32
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'Skills for input neural firewall',
+                'exerciseLengthMinutes': 25
+              }
+            ],
+            'exercisesLength': 57
+          }
+        ]
+      },
+      {
+        'weekNumber': 3,
+        'lessons': [
+          {
+            'hoursToCompleteLesson': 4,
+            'lessonTitle': 'Building payment visualize Chair',
+            'lessonDescription': 'Soluta rem earum. Labore excepturi molestias nisi eligendi in adipisci minima. Tempora at dignissimos odit.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Decentralized quantify transmitter',
+                'videoLengthMinutes': 18,
+                'videoLengthSeconds': 13
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Fully-configurable transmit port',
+                'videoLengthMinutes': 2,
+                'videoLengthSeconds': 1
+              },
+              {
+                'videoIndex': 2,
+                'videoTitle': 'Switchable copy interface',
+                'videoLengthMinutes': 87,
+                'videoLengthSeconds': 19
+              }
+            ],
+            'videosLength': 107,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Savings Hat Sum',
+                'readingLengthMinutes': 18
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'workforce Fantastic out-of-the-box',
+                'readingLengthMinutes': 53
+              }
+            ],
+            'readingsLength': 71,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Basics of synthesize open-source card',
+                'exerciseLengthMinutes': 21
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'Skills for synthesize virtual panel',
+                'exerciseLengthMinutes': 60
+              }
+            ],
+            'exercisesLength': 81
+          },
+          {
+            'hoursToCompleteLesson': 6,
+            'lessonTitle': 'Basics of Generic Monaco PCI Rubber',
+            'lessonDescription': 'Consequatur odio consequatur. Sit in asperiores enim officia nam praesentium. Ut velit ut optio facilis cum perferendis. Quae ut culpa sed cupiditate architecto cumque dicta voluptas commodi. Illo excepturi quia nihil veniam. Dolore voluptas laudantium repellendus quidem.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'User-friendly bypass program',
+                'videoLengthMinutes': 57,
+                'videoLengthSeconds': 55
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Streamlined override microchip',
+                'videoLengthMinutes': 81,
+                'videoLengthSeconds': 34
+              }
+            ],
+            'videosLength': 139,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Taiwan indigo project Intelligent',
+                'readingLengthMinutes': 31
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'schemas Reverse-engineered turquoise Account',
+                'readingLengthMinutes': 23
+              },
+              {
+                'readingIndex': 2,
+                'readingTitle': 'Architect Washington Ethiopia Renminbi',
+                'readingLengthMinutes': 37
+              },
+              {
+                'readingIndex': 3,
+                'readingTitle': 'digital Research Program Arab',
+                'readingLengthMinutes': 49
+              }
+            ],
+            'readingsLength': 140,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Types of compress cross-platform array',
+                'exerciseLengthMinutes': 21
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'Building navigate 1080p driver',
+                'exerciseLengthMinutes': 56
+              }
+            ],
+            'exercisesLength': 77
+          }
+        ]
+      },
+      {
+        'weekNumber': 4,
+        'lessons': [
+          {
+            'hoursToCompleteLesson': 5,
+            'lessonTitle': 'Ethics of Squares target Cheese 1080p',
+            'lessonDescription': 'Suscipit illo vitae ipsam repudiandae est voluptas a. Sunt sed ducimus vel amet. Magni deserunt et repellat ut nulla architecto doloremque qui. Quibusdam non molestias dignissimos quis. Et neque enim.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Stand-alone bypass transmitter',
+                'videoLengthMinutes': 83,
+                'videoLengthSeconds': 18
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Total hack driver',
+                'videoLengthMinutes': 17,
+                'videoLengthSeconds': 58
+              }
+            ],
+            'videosLength': 101,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'Account exuding Minnesota Shoes',
+                'readingLengthMinutes': 11
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'Concrete Concrete Architect hard',
+                'readingLengthMinutes': 74
+              }
+            ],
+            'readingsLength': 85,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Skills for hack auxiliary card',
+                'exerciseLengthMinutes': 61
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'Building reboot 1080p system',
+                'exerciseLengthMinutes': 73
+              }
+            ],
+            'exercisesLength': 134
+          },
+          {
+            'hoursToCompleteLesson': 5,
+            'lessonTitle': 'Steps to Optional next connecting cyan Franc',
+            'lessonDescription': 'Vel facilis ipsam blanditiis provident quas aut. Voluptate inventore voluptatem quaerat veniam iusto aut. Excepturi repellendus sunt illo blanditiis qui vitae alias consequatur eum.',
+            'videos': [
+              {
+                'videoIndex': 0,
+                'videoTitle': 'Re-contextualized parse interface',
+                'videoLengthMinutes': 3,
+                'videoLengthSeconds': 19
+              },
+              {
+                'videoIndex': 1,
+                'videoTitle': 'Robust quantify feed',
+                'videoLengthMinutes': 47,
+                'videoLengthSeconds': 13
+              },
+              {
+                'videoIndex': 2,
+                'videoTitle': 'Realigned calculate protocol',
+                'videoLengthMinutes': 32,
+                'videoLengthSeconds': 3
+              }
+            ],
+            'videosLength': 82,
+            'readings': [
+              {
+                'readingIndex': 0,
+                'readingTitle': 'synthesizing Court matrix utilize capacitor',
+                'readingLengthMinutes': 62
+              },
+              {
+                'readingIndex': 1,
+                'readingTitle': 'gold 24 Berkshire calculate SCSI',
+                'readingLengthMinutes': 21
+              },
+              {
+                'readingIndex': 2,
+                'readingTitle': 'Car bypass Money 1080p Ghana',
+                'readingLengthMinutes': 20
+              },
+              {
+                'readingIndex': 3,
+                'readingTitle': 'magnetic Seamless orchid neural Enterprise-wide',
+                'readingLengthMinutes': 46
+              }
+            ],
+            'readingsLength': 149,
+            'exercises': [
+              {
+                'exerciseIndex': 0,
+                'exerciseTitle': 'Skills for navigate haptic interface',
+                'exerciseLengthMinutes': 60
+              },
+              {
+                'exerciseIndex': 1,
+                'exerciseTitle': 'What is back up neural card',
+                'exerciseLengthMinutes': 9
+              },
+              {
+                'exerciseIndex': 2,
+                'exerciseTitle': 'Ethics of generate digital sensor',
+                'exerciseLengthMinutes': 13
+              }
+            ],
+            'exercisesLength': 82
+          }
+        ]
+      }
+    ],
+    'hoursToCompleteCourse': 50
+  },
   svgs: {
     bookSVG: 'M60,5L60,49.285C50.158,49.585 40.515,50.987 33.335,54.272C31.21,55.242 28.783,55.242 26.668,54.272C19.676,51.074 10.348,49.66 0.777,49.311L0,49.285L0,5C11.46,5.35 22.655,7.19 30,11.765C37.345,7.19 48.54,5.35 60,5ZM55,10.265C42.274,11.225 36.317,13.86 32.669,15.995L32.5,16.095L32.5,49.023C36.241,47.681 43.993,45.348 54.397,44.568L55,44.525L55,10.265ZM5,10.265L5,44.525C15.508,45.246 23.385,47.565 27.28,48.942L27.5,49.02L27.5,16.1C23.818,13.922 17.892,11.237 5,10.265ZM50,37L50,39.646C44.785,40.458 38.873,42.311 35,44L35,41.231C39.17,39.613 44.703,37.809 50,37ZM10,37C15.298,37.809 20.83,39.613 25,41.231L25,44C21.128,42.309 15.215,40.458 10,39.646L10,37ZM50,32L50,34.646C44.785,35.458 38.873,37.311 35,39L35,36.231C39.17,34.613 44.703,32.809 50,32ZM10,32C15.298,32.809 20.83,34.613 25,36.231L25,39C21.128,37.309 15.215,35.458 10,34.646L10,32ZM50,26L50,28.646C44.785,29.458 38.873,31.311 35,33L35,30.231C39.17,28.613 44.703,26.809 50,26ZM10,26C15.298,26.809 20.83,28.613 25,30.231L25,33C21.128,31.309 15.215,29.458 10,28.646L10,26ZM50,21L50,23.646C44.785,24.458 38.873,26.311 35,28L35,25.231C39.17,23.613 44.703,21.809 50,21ZM10,21C15.298,21.807 20.83,23.613 25,25.231L25,28C21.128,26.309 15.215,24.458 10,23.646L10,21ZM50,16L50,18.649C44.785,19.461 38.873,21.311 35,23L35,20.231C39.17,18.613 44.703,16.809 50,16ZM10,16C15.298,16.809 20.83,18.613 25,20.231L25,23C21.128,21.311 15.215,19.458 10,18.649L10,16Z',
     careerBenefitSVG: 'M38,40 L46,40 L46,10 L38,10 L38,40 Z M2,40 L10,40 L10,10 L2,10 L2,40 Z M33.78,8 L48,8 L48,42 L0,42 L0,8 L14.22,8 L15.272,3.788 C15.83,1.558 17.824,0 20.123,0 L27.877,0 C30.176,0 32.17,1.558 32.728,3.788 L33.78,8 Z M17.212,4.272 L16.28,8 L31.72,8 L30.788,4.272 C30.453,2.935 29.256,2 27.877,2 L20.123,2 C18.744,2 17.547,2.935 17.212,4.272 Z M12,40 L36,40 L36,10 L12,10 L12,40 Z',

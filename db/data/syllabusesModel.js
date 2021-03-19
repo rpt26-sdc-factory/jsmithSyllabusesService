@@ -6,7 +6,7 @@ mongoose.connect('mongodb://127.0.0.1/syllabuses', { useNewUrlParser: true, useU
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'syllabuses connection error'));
 db.once('open', () => {
-  console.log('syllabusesInsert connected to db');
+  console.log('syllabusesModel connected to db');
 });
 
 const SyllabusesModel = mongoose.model('syllabuses', syllabusesSchema);
