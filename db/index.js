@@ -1,45 +1,9 @@
 const mongoose = require('mongoose');
+const SyllabusModel = require('./data/syllabusesModel');
+const syllabusSchema = require('./data/syllabusesSchema');
 
-mongoose.connect('mongodb://localhost/syllabuses', {useNewUrlParser: true, useUnifiedTopology: true});
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => {
-  console.log('Syllabus service db connection opened');
-});
-
-const syllabusSchema = new mongoose.Schema({
-  id: Number,
-  weeks: [{
-    weekNumber: Number,
-    hoursToCompleteWeek: Number,
-    title: String,
-    description: String,
-    videos: [{
-      videoIndex: Number,
-      videoTitle: String,
-      videoLengthMinutes: Number,
-      videoLengthSeconds: Number
-    }],
-    videosLength: Number,
-    readings: [{
-      readingIndex: Number,
-      readingTitle: String,
-      readingLengthMinutes: Number
-    }],
-    readingsLength: Number,
-    exercises: [{
-      exerciseIndex: Number,
-      exerciseTitle: String,
-      exerciseLengthMinutes: String
-    }],
-    exercisesLength: Number
-  }]
-});
-
-const Syllabuses = mongoose.model('syllabuses', syllabusSchema);
-
-module.exports.hoursToComplete = (courseNumber, cb) => {
-  Syllabuses.findOne({ id: courseNumber })
+const hoursToComplete = (courseNumber, cb) => {
+  SyllabusModel.findOne({ id: courseNumber })
     .then((syllabusData) => {
       let hoursToCompleteCourse = syllabusData.toObject().hoursToCompleteCourse;
       cb({ hoursToCompleteCourse });
@@ -51,9 +15,9 @@ module.exports.hoursToComplete = (courseNumber, cb) => {
     });
 };
 
-module.exports.syllabus = (courseNumber, cb) => {
+const syllabus = (courseNumber, cb) => {
   const options = {id: courseNumber};
-  Syllabuses.findOne(options)
+  SyllabusModel.findOne(options)
     .then((syllabusData) => {
       cb(syllabusData);
     })
@@ -64,5 +28,5 @@ module.exports.syllabus = (courseNumber, cb) => {
     });
 };
 
-
-
+module.exports.hoursToComplete = hoursToComplete;
+module.exports.syllabus = syllabus;

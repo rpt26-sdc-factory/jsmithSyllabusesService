@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const syllabusesSchema = new Schema({
+const syllabusSchema = new Schema({
   id: Number,
   weeks: [{
     weekNumber: Number,
@@ -33,4 +33,4 @@ const syllabusesSchema = new Schema({
   }]
 });
 
-module.exports = syllabusesSchema;
+module.exports = syllabusSchema;

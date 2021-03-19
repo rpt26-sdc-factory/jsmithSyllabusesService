@@ -9,6 +9,6 @@ db.once('open', () => {
   console.log('syllabusesModel connected to db');
 });
 
-const SyllabusesModel = mongoose.model('syllabuses', syllabusesSchema);
+const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
 
-module.exports = SyllabusesModel;
+module.exports = SyllabusModel;
