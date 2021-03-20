@@ -12,6 +12,7 @@
     "test": "jest --watch",
     "test-data": "jest /db/data/generators.test.js",
     "react-dev": "webpack --watch",
+    "build": "webpack",
     "generate": "node ./db/data/syllabusesGenerator.js",
     "insert": "node ./db/data/syllabusesInserter.js"
   },
