@@ -2,7 +2,6 @@ import React from 'react';
 import Weeks from './Weeks.jsx';
 import state from './initial/state.js';
 
-//renders a syllabus for a course
 class Syllabus extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +19,7 @@ class Syllabus extends React.Component {
           'Content-Type': 'application/json'
         }
       };
+      //fetch syllabus data, set as state.syllabusData
       fetch(`http://localhost:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, syllabusOptions)
         .then((responseData) => {
           return responseData.json();
@@ -41,6 +41,7 @@ class Syllabus extends React.Component {
           'Content-Type': 'application/json'
         }
       };
+      //fetch svgs data, set as state.svgsData
       fetch(`http://localhost:${this.state.imagesPort}/api/svgs`, imagesOptions)
         .then((responseData) => {
           return responseData.json();
@@ -53,29 +54,32 @@ class Syllabus extends React.Component {
             console.error('Error in GET svgs', err);
           }
         });
+      // fetch reviews data, calculate positive reviews, set as state.positive
+      fetch(`http://localhost:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`)
+        .then((responseData) => {
+          return responseData.json();
+        })
+        .then((json) => {
+          const fiveStar = parseInt(json.fiveStarPercent.split('%')[0]);
+          const fourStar = parseInt(json.fourStarPercent.split('%')[0]);
+          const positive = fiveStar + fourStar;
+          const positiveReviews = positive.toString().concat('%');
+          const reviewCount = json.reviewCount;
+          this.setState({ positiveReviews });
+          this.setState({ reviewCount });
+        })
+        .catch((err) => {
+          if (err) {
+            console.error('Error in GET starReviews', err);
+          }
+        });
     });
-
-
-    //uncomment if running reviews server
-    // fetch(`http://localhost:${reviewsPort}/api/starReviews/:${courseNumber}`)
-    //   .then((responseData) => {
-    //     setTotalReviewScore(responseData);
-    //     let fiveStar = parseInt(responseData.fiveStar.slice('%')[0]);
-    //     let fourStar = parseInt(responseData.fourStart.slice('%')[0]);
-    //     let percentage = fiveStar + fourStar;
-    //     positive = percentage.toString().concat(positive);
-    //     setPositiveReviews(positive);
-    //   })
-    //   .catch((err) => {
-    //     if (err) {
-    //       console.error('Error in GET starReviews', err);
-    //     }
-    //   });
 
   }
 
   componentWillUnmount () {
     this.syllabusController.abort();
+    this.imagesController.about();
   }
 
   render() {
@@ -94,7 +98,7 @@ class Syllabus extends React.Component {
               <span>{this.state.positiveReviews}</span>
               <span>{`(${this.state.reviewCount} ratings)`}</span>
               <span className="rating-info">
-                <svg className="rating-info"viewBox="0 0 48 48" ><title>Info</title>
+                <svg className="rating-info" viewBox="0 0 48 48" ><title>Info</title>
                   <path d={this.state.svgsData.infoSVG.i}></path>
                   <path d={this.state.svgsData.infoSVG.dot}></path>
                   <polygon points={this.state.svgsData.infoSVG.circle}></polygon>
