@@ -25,16 +25,13 @@ body {
 
 .rating-thumb {
   fill: #F7BB56;
-  height: 15px;
-  width: 15px;
-  padding-top: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin-bottom: -2px;
 }
 
 .rating-info {
   fill: #363B42;
+}
+
+.rating-svg {
   height: 15px;
   width: 15px;
   padding-top: 5px;
@@ -96,8 +93,6 @@ body {
 .lesson-hours {
   display: grid;
   grid-template-columns: 50px 750px;
-
-
 }
 
 .lesson-materials .lesson-name {
@@ -148,11 +143,8 @@ body {
   height: 40px;
   width: 40px;
   line-height: 40px;
-  -moz-border-radius: 30px; /* or 50% */
-  border-radius: 30px; /* or 50% */
   border-radius: 50%; /* or 50% */
   margin-top: -12px;
-
 }
 
 .orange-circle {

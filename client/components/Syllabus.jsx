@@ -1,5 +1,6 @@
 import React from 'react';
 import Weeks from './Weeks.jsx';
+import Header from './Header.jsx';
 import state from './initial/state.js';
 
 class Syllabus extends React.Component {
@@ -8,6 +9,7 @@ class Syllabus extends React.Component {
     this.state = state;
     this.syllabusController = new AbortController();
     this.imagesController = new AbortController();
+    this.reviewsController = new AbortController();
   }
 
   //sets initial state, then sets courseNumber from window, then fetches data
@@ -19,7 +21,6 @@ class Syllabus extends React.Component {
           'Content-Type': 'application/json'
         }
       };
-      //fetch syllabus data, set as state.syllabusData
       fetch(`http://localhost:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, syllabusOptions)
         .then((responseData) => {
           return responseData.json();
@@ -41,7 +42,6 @@ class Syllabus extends React.Component {
           'Content-Type': 'application/json'
         }
       };
-      //fetch svgs data, set as state.svgsData
       fetch(`http://localhost:${this.state.imagesPort}/api/svgs`, imagesOptions)
         .then((responseData) => {
           return responseData.json();
@@ -54,8 +54,14 @@ class Syllabus extends React.Component {
             console.error('Error in GET svgs', err);
           }
         });
-      // fetch reviews data, calculate positive reviews, set as state.positive
-      fetch(`http://localhost:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`)
+
+      const reviewsOptions = {
+        signal: this.reviewsController.signal,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      fetch(`http://localhost:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`, reviewsOptions)
         .then((responseData) => {
           return responseData.json();
         })
@@ -74,48 +80,21 @@ class Syllabus extends React.Component {
           }
         });
     });
-
   }
 
   componentWillUnmount () {
     this.syllabusController.abort();
-    this.imagesController.about();
+    this.imagesController.abort();
+    this.reviewsController.abort();
   }
 
   render() {
-    if (this.state.svgsData) {
-      return (
-        <div className="syllabus">
-          <a name="syllabus"></a>
-          <div className="syllabus-title">
-            {'Syllabus - What you will learn from this course'}
-            <br />
-            <span className="rating">
-              {'Content Rating'}
-              <svg className="rating-thumb" viewBox="0 0 48 48" ><title id="ThumbsUp950e403d-06ae-447e-9ee4-e5ace52d6cd2">Thumbs Up</title>
-                <path d={this.state.svgsData.thumbSVG}></path>
-              </svg>
-              <span>{this.state.positiveReviews}</span>
-              <span>{`(${this.state.reviewCount} ratings)`}</span>
-              <span className="rating-info">
-                <svg className="rating-info" viewBox="0 0 48 48" ><title>Info</title>
-                  <path d={this.state.svgsData.infoSVG.i}></path>
-                  <path d={this.state.svgsData.infoSVG.dot}></path>
-                  <polygon points={this.state.svgsData.infoSVG.circle}></polygon>
-                </svg>
-              </span>
-            </span>
-          </div>
-          <div>
-            <Weeks svgsData={this.state.svgsData} syllabusData={this.state.syllabusData} />
-          </div>
-        </div>
-      );
-    } else {
-      return (
-        <div>Fetching Data...</div>
-      );
-    }
+    return (
+      <div className="syllabus">
+        <Header svgsData={this.state.svgsData} positiveReviews={this.state.positiveReviews} reviewCount={this.state.reviewCount} />
+        <Weeks svgsData={this.state.svgsData} syllabusData={this.state.syllabusData} />
+      </div>
+    );
   }
 }
 
