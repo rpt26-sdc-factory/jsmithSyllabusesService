@@ -9,11 +9,11 @@
   },
   "scripts": {
     "start": "nodemon server/index.js",
-    "test": "jest --watch",
-    "test-data": "jest /db/data/generators.test.js",
+    "test": "jest",
+    "test-dev": "jest --watch",
     "react-dev": "webpack --watch",
     "build": "webpack",
-    "generate": "node ./db/data/syllabusesGenerator.js",
+    "seed": "node ./db/data/syllabusesGenerator.js",
     "insert": "node ./db/data/syllabusesInserter.js"
   },
   "dependencies": {

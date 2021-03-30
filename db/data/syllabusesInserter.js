@@ -14,5 +14,4 @@ let syllabusesInsert = () => {
   });
 };
 
-syllabusesInsert();
 module.exports = syllabusesInsert;

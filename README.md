@@ -11,7 +11,7 @@
   - https://github.com/Ingenuity-rpt26/vinayService2
   - https://github.com/Ingenuity-rpt26/shane-service-summary
   - https://github.com/Ingenuity-rpt26/vinayService2
-  - https://github.com/Ingenuity-rpt26/jsmithService1
+  - https://github.com/Ingenuity-rpt26/jsmithImages
   - https://github.com/Ingenuity-rpt26/jsmithInstructorsService
 
 ## Table of Contents
@@ -21,13 +21,10 @@
 1. [Development](#development)
 
 ## Usage
-> npm install
+ npm install
 
-> Generate Syllabuses data with "npm run generate"
+ Seed Syllabuses data with "npm run seed"
 
-> Test generated data with "npm run test"
-
-> Insert Syllabuses data to database with "npm run inserter"
 
 ## Requirements
 
@@ -37,14 +34,32 @@
 
 Each course has a syllabus.  Each syllabus has one or more weeks.  Each week has one or more lessons.  Each lesson has one or more videos, readings, and exercises.
 
->The component flow goes...
+<h3>Component Flow:</h3>
 
->Syllabus => Weeks =>  Week => Lesson =>
+Syllabus ->
+* Header -> Rating
 
->        Videos => Video
->        Readings => Reading
->        Exercises => Exercise
+* Weeks =>  Week ->
 
+* * WeekTitle
+
+* * Lesson =>
+
+* * * LessonHeader
+
+* * * LessonTitle
+
+* * * LessonOverview;
+
+* * * Videos => Video
+
+* * * Readings => Reading
+
+* * *  Exercises => Exercise
+
+> -> One component
+
+> => An array of components
 
 ### Installing Dependencies
 

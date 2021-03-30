@@ -8,7 +8,7 @@ const Videos = (props) => {
       <div className="videos-count">
         <div className="videos-svg plain-svg">
           <svg viewBox="0 0 48 48">
-            <path d={props.svgsData.videosSVG}></path>
+            <path d={props.videosSVG}></path>
           </svg>
         </div>
         <div className="videos-count-text">

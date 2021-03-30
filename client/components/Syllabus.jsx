@@ -7,85 +7,41 @@ class Syllabus extends React.Component {
   constructor(props) {
     super(props);
     this.state = state;
-    this.syllabusController = new AbortController();
-    this.imagesController = new AbortController();
-    this.reviewsController = new AbortController();
+    this.controller = new AbortController();
+  }
+
+  fetches () {
+    const options = { signal: this.controller.signal };
+    fetch(`http://localhost:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
+      .then(responseData => responseData.json())
+      .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
+      .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
+
+    fetch(`http://localhost:${this.state.imagesPort}/api/svgs`, options)
+      .then(responseData => responseData.json())
+      .then(responseJSON => this.setState({ svgsData: responseJSON }))
+      .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
+
+    fetch(`http://localhost:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`, options)
+      .then(responseData => responseData.json())
+      .then((responseJSON) => {
+        const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
+        const fourStar = parseInt(responseJSON.fourStarPercent.split('%')[0]);
+        const positiveReviews = fiveStar + fourStar;
+        this.setState({ positiveReviews: positiveReviews.toString().concat('%') });
+        this.setState({ reviewCount: responseJSON.reviewCount });
+      })
+      .catch((err) => { if (err) { console.error('Error in GET starReviews', err); } });
   }
 
   //sets initial state, then sets courseNumber from window, then fetches data
   componentDidMount() {
-    this.setState({courseNumber: window.location.pathname.split('/')[1]}, () => {
-      const syllabusOptions = {
-        signal: this.syllabusController.signal,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(`http://localhost:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, syllabusOptions)
-        .then((responseData) => {
-          return responseData.json();
-        })
-        .then((responseJSON) => {
-          this.setState({ syllabusData: responseJSON }, () => {
-          });
-        })
-        .catch((err) => {
-          if (err && err.message !== 'The user aborted a request.') {
-            console.error('Error in GET syllabus', err);
-          }
-        });
-
-      const imagesOptions = {
-        mode: 'cors',
-        signal: this.imagesController.signal,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(`http://localhost:${this.state.imagesPort}/api/svgs`, imagesOptions)
-        .then((responseData) => {
-          return responseData.json();
-        })
-        .then((responseJSON) => {
-          this.setState({ svgsData: responseJSON });
-        })
-        .catch((err) => {
-          if (err) {
-            console.error('Error in GET svgs', err);
-          }
-        });
-
-      const reviewsOptions = {
-        signal: this.reviewsController.signal,
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      fetch(`http://localhost:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`, reviewsOptions)
-        .then((responseData) => {
-          return responseData.json();
-        })
-        .then((json) => {
-          const fiveStar = parseInt(json.fiveStarPercent.split('%')[0]);
-          const fourStar = parseInt(json.fourStarPercent.split('%')[0]);
-          const positive = fiveStar + fourStar;
-          const positiveReviews = positive.toString().concat('%');
-          const reviewCount = json.reviewCount;
-          this.setState({ positiveReviews });
-          this.setState({ reviewCount });
-        })
-        .catch((err) => {
-          if (err) {
-            console.error('Error in GET starReviews', err);
-          }
-        });
-    });
+    const courseNumber = window.location.pathname.split('/')[1] || 1;
+    this.setState({ courseNumber }, () => { this.fetches(); });
   }
 
   componentWillUnmount () {
-    this.syllabusController.abort();
-    this.imagesController.abort();
-    this.reviewsController.abort();
+    this.controller.abort();
   }
 
   render() {
