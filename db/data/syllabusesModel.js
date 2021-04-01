@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 const syllabusesSchema = require('./syllabusesSchema.js');
+const dotenv = require('dotenv');
+dotenv.config();
 
-mongoose.connect('mongodb://127.0.0.1/syllabuses', { useNewUrlParser: true, useUnifiedTopology: true });
+const MONGO_HOSTNAME = process.env.MONGO_HOSTNAME || 'localhost';
+const MONGO_PORT = process.env.MONGO_PORT || 27017;
+const MONGO_DB = process.env.MONGO_DB || 'syllabuses';
+
+mongoose.connect(`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'syllabuses connection error'));

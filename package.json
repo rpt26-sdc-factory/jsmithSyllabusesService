@@ -19,6 +19,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mongoose": "^5.11.19",
     "path": "^0.12.7"
@@ -35,7 +36,7 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^5.1.2",
     "eslint": "^7.21.0",
-    "eslint-config-hackreactor": "^1.0.0",
+    "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "faker": "^5.4.0",
     "html-webpack-plugin": "^5.3.1",

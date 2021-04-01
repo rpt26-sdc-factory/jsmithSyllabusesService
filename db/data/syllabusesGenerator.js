@@ -145,7 +145,6 @@ const generateSyllabuses = () => {
   }
 
   fs.writeFileSync('./db/data/syllabuses.json', JSON.stringify(syllabuses, null, '\t'));
-  console.log('wrote stuff?');
   const syllabusesInserter = require('./syllabusesInserter.js');
   syllabusesInserter();
   return;
