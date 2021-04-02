@@ -68,7 +68,8 @@ module.exports = {
   },
   positiveReviews: '3.14%',
   reviewCount: 420,
-  syllabusPort: 3005,
+  syllabusPort: '3005',
+  syllabusIp: '54.176.19.199',
   imagesPort: 3006,
   reviewsPort: 3007,
   courseNumber: 1

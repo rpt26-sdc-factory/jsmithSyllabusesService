@@ -12,7 +12,8 @@ class Syllabus extends React.Component {
 
   fetches () {
     const options = { signal: this.controller.signal };
-    fetch(`http://localhost:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
+    console.log(`fetch address: ${this.state.syllabusIp}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`);
+    fetch(`http://${this.state.syllabusIp}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
       .then(responseData => responseData.json())
       .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
       .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
