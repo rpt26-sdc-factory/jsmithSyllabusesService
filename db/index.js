@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const SyllabusModel = require('./data/syllabusesModel');
-const syllabusSchema = require('./data/syllabusesSchema');
 
 const hoursToComplete = (courseNumber, cb) => {
   SyllabusModel.findOne({ id: courseNumber })
