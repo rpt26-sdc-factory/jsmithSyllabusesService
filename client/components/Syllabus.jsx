@@ -12,13 +12,12 @@ class Syllabus extends React.Component {
 
   fetches () {
     const options = { signal: this.controller.signal };
-    console.log(`fetch address: ${this.state.syllabusIp}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`);
-    fetch(`http://${this.state.syllabusIp}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
+    fetch(`http://${this.state.servicesIp}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
       .then(responseData => responseData.json())
       .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
       .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
 
-    fetch(`http://localhost:${this.state.imagesPort}/api/svgs`, options)
+    fetch(`http://${this.state.servicesIp}:${this.state.imagesPort}/api/svgs`, options)
       .then(responseData => responseData.json())
       .then(responseJSON => this.setState({ svgsData: responseJSON }))
       .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
