@@ -70,6 +70,7 @@ module.exports = {
   reviewCount: 420,
   syllabusPort: '3005',
   servicesIp: '54.176.19.199',
+  reviewsIp: '127.0.0.1',
   imagesPort: 3006,
   reviewsPort: 3007,
   courseNumber: 1

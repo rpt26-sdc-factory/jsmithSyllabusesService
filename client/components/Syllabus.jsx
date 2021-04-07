@@ -22,7 +22,7 @@ class Syllabus extends React.Component {
       .then(responseJSON => this.setState({ svgsData: responseJSON }))
       .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
 
-    fetch(`http://localhost:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`, options)
+    fetch(`http://${this.state.reviewsIp}:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`, options)
       .then(responseData => responseData.json())
       .then((responseJSON) => {
         const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
