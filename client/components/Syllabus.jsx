@@ -14,26 +14,26 @@ class Syllabus extends React.Component {
 
   fetches () {
     const {
+      servicesURL,
       syllabusPort,
       courseNumber,
-      imagesURL,
       imagesPort,
       reviewsURL,
       reviewsPort,
     } = this.state;
 
     const options = { signal: this.controller.signal };
-    fetch(`http://${this.state.servicesURL}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
+    fetch(`http://${servicesURL}:${syllabusPort}/api/syllabus/${courseNumber}`, options)
       .then(responseData => responseData.json())
       .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
       .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
 
-    fetch(`http://${this.state.servicesURL}:${this.state.imagesPort}/api/svgs`, options)
+    fetch(`http://${servicesURL}:${imagesPort}/api/svgs`, options)
       .then(responseData => responseData.json())
       .then(responseJSON => this.setState({ svgsData: responseJSON }))
       .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
 
-    fetch(`http://${this.state.reviewsURL}:${this.state.reviewsPort}/api/totalReviewScore/${this.state.courseNumber}`, options)
+    fetch(`http://${reviewsURL}:${reviewsPort}/api/totalReviewScore/${courseNumber}`, options)
       .then(responseData => responseData.json())
       .then((responseJSON) => {
         const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
@@ -56,10 +56,17 @@ class Syllabus extends React.Component {
   }
 
   render() {
+    const {
+      svgsData,
+      positiveReviews,
+      reviewCount,
+      syllabusData
+    } = this.state;
+
     return (
       <div className="syllabus">
-        <Header svgsData={this.state.svgsData} positiveReviews={this.state.positiveReviews} reviewCount={this.state.reviewCount} />
-        <Weeks svgsData={this.state.svgsData} syllabusData={this.state.syllabusData} />
+        <Header svgsData={svgsData} positiveReviews={positiveReviews} reviewCount={reviewCount} />
+        <Weeks svgsData={svgsData} syllabusData={syllabusData} />
       </div>
     );
   }
