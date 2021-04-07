@@ -21,14 +21,22 @@
 1. [Development](#development)
 
 ## Usage
- npm install
+>npm install
 
- Seed Syllabuses data with "npm run seed"
+Ensure database is running and URL and proxy are correct in ./.env
+
+
+
+> npm run seed
 
 
 ## Requirements
 
->Syllabuses relies on Images and Reviews services for data
+Syllabuses relies on Images and Reviews services for data.
+
+Ensure URL's and ports are correct in ./client/components/initial/state.js
+
+> npm run build (as necessary)
 
 ## Development
 
@@ -36,30 +44,27 @@ Each course has a syllabus.  Each syllabus has one or more weeks.  Each week has
 
 <h3>Component Flow:</h3>
 
-Syllabus ->
-* Header -> Rating
+-> Syllabus
+* -> Header -> Rating
 
-* Weeks =>  Week ->
+* -> Weeks =>  Week
 
-* * WeekTitle
+* * -> WeekTitle
 
-* * Lesson =>
+* * => Lesson
 
-* * * LessonHeader
+* * * -> LessonHeader
 
-* * * LessonTitle
+* * * -> LessonTitle
 
-* * * LessonOverview;
+* * * -> LessonOverview;
 
-* * * Videos => Video
+* * * -> Videos => Video
 
-* * * Readings => Reading
+* * * -> Readings => Reading
 
-* * *  Exercises => Exercise
+* * * -> Exercises => Exercise
 
-> -> One component
-
-> => An array of components
 
 ### Installing Dependencies
 

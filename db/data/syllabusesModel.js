@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
-const syllabusesSchema = require('./syllabusesSchema.js');
 const dotenv = require('dotenv');
+const syllabusesSchema = require('./syllabusesSchema.js');
+
 dotenv.config();
 
 const MONGO_HOSTNAME = process.env.MONGO_HOSTNAME || 'localhost';

@@ -7,10 +7,21 @@ class Syllabus extends React.Component {
   constructor(props) {
     super(props);
     this.state = state;
+
+    //aborts get if component is unmounted
     this.controller = new AbortController();
   }
 
   fetches () {
+    const {
+      syllabusPort,
+      courseNumber,
+      imagesURL,
+      imagesPort,
+      reviewsURL,
+      reviewsPort,
+    } = this.state;
+
     const options = { signal: this.controller.signal };
     fetch(`http://${this.state.servicesIp}:${this.state.syllabusPort}/api/syllabus/${this.state.courseNumber}`, options)
       .then(responseData => responseData.json())
@@ -27,9 +38,9 @@ class Syllabus extends React.Component {
       .then((responseJSON) => {
         const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
         const fourStar = parseInt(responseJSON.fourStarPercent.split('%')[0]);
-        const positiveReviews = fiveStar + fourStar;
-        this.setState({ positiveReviews: positiveReviews.toString().concat('%') });
-        this.setState({ reviewCount: responseJSON.reviewCount });
+        const positiveReviews = (fiveStar + fourStar).toString().concat('%');
+        const reviewCount = responseJSON.reviewCount;
+        this.setState({ positiveReviews, reviewCount });
       })
       .catch((err) => { if (err) { console.error('Error in GET starReviews', err); } });
   }
