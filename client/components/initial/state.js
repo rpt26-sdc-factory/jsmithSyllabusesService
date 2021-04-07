@@ -69,7 +69,9 @@ module.exports = {
   positiveReviews: '3.14%',
   reviewCount: 420,
   syllabusPort: 3005,
+  imagesURL: '54.176.19.199',
   imagesPort: 3006,
+  reviewsURL: '127.0.0.1',
   reviewsPort: 3007,
   courseNumber: 1
 };
