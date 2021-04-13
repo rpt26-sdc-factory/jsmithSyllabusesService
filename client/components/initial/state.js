@@ -71,7 +71,7 @@ module.exports = {
   syllabusPort: '3005',
   servicesURL: '54.176.19.199',
   imagesPort: 3006,
-  reviewsURL: '127.0.0.1',
-  reviewsPort: 3007,
+  reviewsURL: '18.221.221.55',
+  reviewsPort: 80,
   courseNumber: 1
 };

@@ -13,6 +13,7 @@
     "test-dev": "jest --watch",
     "react-dev": "webpack --watch",
     "build": "webpack",
+    "build-prod": "webpack --mode=production",
     "seed": "node ./db/data/syllabusesGenerator.js",
     "insert": "node ./db/data/syllabusesInserter.js"
   },
