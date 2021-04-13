@@ -12,16 +12,19 @@ app.use(express.static('./jsmithSyllabusesService/public'));
 app.use(cors());
 
 app.get('/:courseNumber', (req, res) => {
+  // console.log('GET / courseNumber: ', courseNumber);
   res.sendFile(path.resolve('./jsmithSyllabusesService/public/index.html'));
 });
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
+  // console.log('GET /api/hoursToComplete courseNumber: ', courseNumber);
   db.hoursToComplete(req.params.courseNumber, (responseData) => {
     res.send(responseData);
   });
 });
 
 app.get('/api/syllabus/:courseNumber', (req, res) => {
+  // console.log('GET /api/syllabus courseNumber: ', courseNumber);
   db.syllabus(req.params.courseNumber, (responseData) => {
     res.send(responseData);
   });
