@@ -53,8 +53,6 @@
   },
   "jest": {
     "automock": false,
-    "setupFiles": [
-      "./__test__/setupJest.js"
-    ]
+    "verbose": true
   }
 }
