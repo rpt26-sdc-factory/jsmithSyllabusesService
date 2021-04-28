@@ -28,9 +28,9 @@ const syllabusSchema = new Schema({
         exerciseLengthMinutes: Number
       }],
       exercisesLength: Number
-    }],
-    hoursToCompleteCourse: Number
-  }]
+    }]
+  }],
+  hoursToCompleteCourse: Number
 });
 
 module.exports = syllabusSchema;
