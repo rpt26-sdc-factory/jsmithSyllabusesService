@@ -12,21 +12,44 @@ app.use(express.static('./jsmithSyllabusesService/public'));
 app.use(cors());
 
 app.get('/:courseNumber', (req, res) => {
-  // console.log('GET / courseNumber: ', courseNumber);
+  // console.log('GET / courseNumber: ', req.params.courseNumber);
   res.sendFile(path.resolve('./jsmithSyllabusesService/public/index.html'));
 });
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
-  // console.log('GET /api/hoursToComplete courseNumber: ', courseNumber);
+  // console.log('GET /api/hoursToComplete courseNumber: ', req.params.courseNumber);
   db.hoursToComplete(req.params.courseNumber, (responseData) => {
     res.send(responseData);
   });
 });
 
+// READ
 app.get('/api/syllabus/:courseNumber', (req, res) => {
-  // console.log('GET /api/syllabus courseNumber: ', courseNumber);
+  // console.log('GET /api/syllabus courseNumber: ', req.params.courseNumber);
   db.syllabus(req.params.courseNumber, (responseData) => {
     res.send(responseData);
+  });
+});
+
+// CREATE
+app.post('/api/syllabus/:courseNumber', (req, res) => {
+  console.log('POST /api/syllabus courseNumber: ', req.params.courseNumber);
+});
+
+// UPDATE
+app.put('/api/syllabus/:courseNumber', (req, res) => {
+  console.log('PUT /api/syllabus courseNumber: ', req.params.courseNumber);
+});
+
+// DELETE
+app.delete('/api/syllabus/:courseNumber', (req, res) => {
+  console.log('DELETE /api/syllabus courseNumber: ', req.params.courseNumber);
+  db.deleteEntry(req.params.courseNumber, (err, success) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.sendStatus(202);
+    }
   });
 });
 
