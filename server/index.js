@@ -19,6 +19,7 @@ app.get('/:courseNumber', (req, res) => {
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
   // console.log('GET /api/hoursToComplete courseNumber: ', req.params.courseNumber);
   db.hoursToComplete(req.params.courseNumber, (responseData) => {
+    // add error first callback ?
     res.send(responseData);
   });
 });
@@ -27,6 +28,7 @@ app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
 app.get('/api/syllabus/:courseNumber', (req, res) => {
   // console.log('GET /api/syllabus courseNumber: ', req.params.courseNumber);
   db.syllabus(req.params.courseNumber, (responseData) => {
+    // add error first callback ?
     res.send(responseData);
   });
 });
@@ -34,11 +36,25 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
 // CREATE
 app.post('/api/syllabus/:courseNumber', (req, res) => {
   console.log('POST /api/syllabus courseNumber: ', req.params.courseNumber);
+  db.insertEntry(req.params.courseNumber, req.body, (err, success) => {
+    if (err) {
+      res.sendStatus(405);
+    } else {
+      res.sendStatus(201);
+    }
+  })
 });
 
 // UPDATE
 app.put('/api/syllabus/:courseNumber', (req, res) => {
   console.log('PUT /api/syllabus courseNumber: ', req.params.courseNumber);
+  db.updateEntry(req.params.courseNumber, req.body, (err, success) => {
+    if (err) {
+      res.sendStatus(405);
+    } else {
+      res.sendStatus(202)
+    }
+  });
 });
 
 // DELETE
@@ -56,3 +72,6 @@ app.delete('/api/syllabus/:courseNumber', (req, res) => {
 app.listen(port, () => {
   console.log(`Syllabus service listening at http://localhost:${port}`);
 });
+
+module.exports.app = app;
+module.exports.port = port;
