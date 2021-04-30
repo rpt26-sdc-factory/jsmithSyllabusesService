@@ -41,9 +41,41 @@ const deleteEntry = (courseNumber, cb) => {
     .catch((err) => {
       console.error(err);
       cb(err);
+    });
+};
+
+const insertEntry = (courseNumber, entry, cb) => {
+
+  // !!! make sure that courseNumber not already inside of database
+  SyllabusModel.create(entry)
+    .then((success) => {
+      cb(null, success);
     })
+    .catch((err) => {
+      console.error(err);
+      cb(err, null);
+    });
+};
+
+const updateEntry = (courseNumber, edits, cb) => {
+  const filter = {id: courseNumber};
+  // !!! make sure that courseNumber exists before trying to put
+
+  // {new: true} means that document returned is the document after the edits have been applied
+  // Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify` option set to false are deprecated (but successful)
+  SyllabusModel.findOneAndUpdate(filter, edits, {new: true})
+    .then((success) => {
+      cb(null, success);
+    })
+    .catch((err) => {
+      console.error(err);
+      cb(err, null);
+    })
+
 };
 
 module.exports.hoursToComplete = hoursToComplete;
 module.exports.syllabus = syllabus;
 module.exports.deleteEntry = deleteEntry;
+module.exports.insertEntry = insertEntry;
+module.exports.updateEntry = updateEntry;
