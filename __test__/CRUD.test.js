@@ -3,22 +3,21 @@ import 'regenerator-runtime/runtime';
 const supertest = require('supertest');
 const mongoose = require('mongoose');
 
-const syllabusesSchema = require('../db/data/syllabusesSchema.js');
-const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
-
 const server = require('../server/index.js');
 const database = require('../db/index.js');
 
-// const url = `http://localhost:${server.port}`;
+const syllabusesSchema = require('../db/data/syllabusesSchema.js');
+const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
+
 const databaseName = 'testSyllabi';
-// const request = supertest(server.app);
+const request = supertest(server.app);
+const serverUrl = `/api/syllabus/`;
 
 const sampleData = require('../db/data/ONLY5syllabuses.json');
 
 beforeAll(async () => {
-  const url = `mongodb://127.0.0.1/${databaseName}`;
-  await mongoose.connect(url, {useNewUrlParser: true});
-
+  const databaseUrl = `mongodb://127.0.0.1/${databaseName}`;
+  await mongoose.connect(databaseUrl, {useNewUrlParser: true});
 });
 
 beforeEach(async () => {
@@ -41,6 +40,18 @@ describe('Create', () =>  {
       }
       done();
     });
+  });
+
+  it('server should handle post requests', async done => {
+    let response = await request.post(serverUrl + '6').send(sixEntry);
+    expect(response.statusCode).toBe(201);
+    done();
+  });
+
+  it('server should return error (post unsuccessful) if courseNumber already exists', async done=> {
+    let response = await request.post(serverUrl + '2').send(secondEntry);
+    expect(response.statusCode).toBe(405);
+    done();
   });
 });
 
@@ -77,6 +88,19 @@ describe('Read', () => {
       done();
     })
   });
+
+  it('server should return the data if request\'s courseNumber exists', async done => {
+    let response = await request.get(serverUrl + '1');
+    expect(response.body.hoursToCompleteCourse).toBe(46);
+    expect(response.statusCode).toBe(202);
+    done();
+  });
+
+  it('server should return an error if courseNumber doesn\'t exist', async done => {
+    let response = await request.get(serverUrl + '99');
+    expect(response.statusCode).toBe(404);
+    done();
+  });
 });
 
 // UPDATE
@@ -99,7 +123,21 @@ describe('Update', () => {
       }
       done();
     })
-  })
+  });
+
+  it('server should update entry', async done => {
+    let response = await request.put(serverUrl + '2').send({hoursToCompleteCourse: 1212});
+    expect(response.statusCode).toBe(202);
+    let record = await SyllabusModel.findOne({id: 2});
+    expect(record.hoursToCompleteCourse).toBe(1212);
+    done();
+  });
+
+  it('should should NOT update entry if it does not exist', async done => {
+    let response = await request.put(serverUrl + '98').send({});
+    expect(response.statusCode).toBe(405);
+    done();
+  });
 
 });
 
@@ -126,20 +164,157 @@ describe('Delete', () => {
     });
   });
 
-  // // server
-  // test('if record matches id, success code attached to response', async done => {
-  //   let response = await request.delete('/api/syllabus/2');
-  //   expect(response.status).toBe(202);
-  // });
+  it('server should return success code if record matching id is successfully deleted', async done => {
+    let response = await request.delete(serverUrl + '2');
+    expect(response.status).toBe(202);
+    let docCount = await SyllabusModel.find({id: {$gt: 0}});
+    expect(docCount.length).toBe(4);
+    done();
+  });
 
-  // // server
-  // test('if record doesn\'t match id, error code appears on response', async done => {
-  //   let response = await request.delete('/api/syllabus/888');
-  //   expect(response.status).toBe(404);
-  // });
+  it('server should return error code if record doesn\'t match id', async done => {
+    let response = await request.delete(serverUrl + '888');
+    expect(response.status).toBe(404);
+    done();
+  });
 
 });
 
+
+const secondEntry = {
+  "id": 2,
+  "weeks": [
+    {
+      "weekNumber": 1,
+      "lessons": [
+        {
+          "hoursToCompleteLesson": 6,
+          "lessonTitle": "What is overriding SMS Washington",
+          "lessonDescription": "Dolor vero ducimus tempore doloribus sit quasi. Aut quod quo dolorem numquam voluptatum est ab. Commodi doloribus vero doloribus et. Maxime a sit possimus ut voluptatem rerum consequatur. Et quo mollitia at sed nobis ex aliquam eligendi. Natus asperiores magnam laudantium ipsa asperiores.",
+          "videos": [
+            {
+              "videoIndex": 0,
+              "videoTitle": "Expanded synthesize pixel",
+              "videoLengthMinutes": 9,
+              "videoLengthSeconds": 17
+            },
+            {
+              "videoIndex": 1,
+              "videoTitle": "Proactive override capacitor",
+              "videoLengthMinutes": 85,
+              "videoLengthSeconds": 57
+            },
+            {
+              "videoIndex": 2,
+              "videoTitle": "Distributed calculate monitor",
+              "videoLengthMinutes": 18,
+              "videoLengthSeconds": 26
+            }
+          ],
+          "videosLength": 113,
+          "readings": [
+            {
+              "readingIndex": 0,
+              "readingTitle": "Steel Paradigm Namibia",
+              "readingLengthMinutes": 38
+            },
+            {
+              "readingIndex": 1,
+              "readingTitle": "Colorado non-volatile 24",
+              "readingLengthMinutes": 5
+            }
+          ],
+          "readingsLength": 43,
+          "exercises": [
+            {
+              "exerciseIndex": 0,
+              "exerciseTitle": "Building transmit primary monitor",
+              "exerciseLengthMinutes": 47
+            },
+            {
+              "exerciseIndex": 1,
+              "exerciseTitle": "Skills for navigate 1080p pixel",
+              "exerciseLengthMinutes": 74
+            },
+            {
+              "exerciseIndex": 2,
+              "exerciseTitle": "Types of connect wireless protocol",
+              "exerciseLengthMinutes": 61
+            },
+            {
+              "exerciseIndex": 3,
+              "exerciseTitle": "Ethics of quantify primary driver",
+              "exerciseLengthMinutes": 37
+            }
+          ],
+          "exercisesLength": 219
+        },
+        {
+          "hoursToCompleteLesson": 4,
+          "lessonTitle": "Basics of IB Alaska Mill Moldova grey",
+          "lessonDescription": "Consequatur labore a dolorum. Eum sunt tempore odio ullam. Nostrum quidem error eligendi est delectus doloremque culpa libero. Aspernatur saepe velit nihil optio dicta aut saepe.",
+          "videos": [
+            {
+              "videoIndex": 0,
+              "videoTitle": "Synergistic parse transmitter",
+              "videoLengthMinutes": 83,
+              "videoLengthSeconds": 3
+            },
+            {
+              "videoIndex": 1,
+              "videoTitle": "Profit-focused program feed",
+              "videoLengthMinutes": 5,
+              "videoLengthSeconds": 43
+            }
+          ],
+          "videosLength": 88,
+          "readings": [
+            {
+              "readingIndex": 0,
+              "readingTitle": "engineer West Avon Devolved mobile",
+              "readingLengthMinutes": 44
+            },
+            {
+              "readingIndex": 1,
+              "readingTitle": "Music backing Concrete drive Valley",
+              "readingLengthMinutes": 5
+            },
+            {
+              "readingIndex": 2,
+              "readingTitle": "Canyon Wooden Forest Beauty Plastic",
+              "readingLengthMinutes": 18
+            }
+          ],
+          "readingsLength": 67,
+          "exercises": [
+            {
+              "exerciseIndex": 0,
+              "exerciseTitle": "What is compress auxiliary hard drive",
+              "exerciseLengthMinutes": 8
+            },
+            {
+              "exerciseIndex": 1,
+              "exerciseTitle": "What is synthesize mobile matrix",
+              "exerciseLengthMinutes": 71
+            },
+            {
+              "exerciseIndex": 2,
+              "exerciseTitle": "Building bypass optical program",
+              "exerciseLengthMinutes": 10
+            },
+            {
+              "exerciseIndex": 3,
+              "exerciseTitle": "What is connect mobile capacitor",
+              "exerciseLengthMinutes": 4
+            }
+          ],
+          "exercisesLength": 93
+        }
+      ]
+    }
+  ],
+  "hoursToCompleteCourse": 10
+};
 
 const sixEntry = {
   "id": 6,
