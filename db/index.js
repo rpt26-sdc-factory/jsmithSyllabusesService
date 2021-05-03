@@ -1,13 +1,16 @@
 const mongoose = require('mongoose');
 
-// commented out SyllabusModel and modeled directly inside of file because otherwise tests won't run;
-// tries to make two connections to mongodb
-// put the difference between lines 7 and 9 / 10 inside of an if/else block related to which enviornment is being run ???
+// SyllabusModel needs to be declared ahead of time else tests error because undefined variable
+// ideally, should be a constant but alas...
+var SyllabusModel;
 
-// const SyllabusModel = require('./data/syllabusesModel');
-
-const syllabusesSchema = require('./data/syllabusesSchema.js');
-const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
+if (process.env.NODE_ENV.trim() !== 'test') {
+  SyllabusModel = require('./data/syllabusesModel');
+} else {
+  // if these lines of code are run inside of the test enviornment two connections to mongodb are attempted which causes failures
+  const syllabusesSchema = require('./data/syllabusesSchema.js');
+  SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
+}
 
 const hoursToComplete = (courseNumber, cb) => {
   SyllabusModel.findOne({ id: courseNumber })
@@ -24,7 +27,11 @@ const syllabus = (courseNumber, cb) => {
   const options = {id: courseNumber};
   SyllabusModel.findOne(options)
     .then((syllabusData) => {
-      cb(null, syllabusData);
+      if (!syllabusData) {
+        cb('syllabusData is null', null);
+      } else {
+        cb(null, syllabusData);
+      }
     })
     .catch((err) => {
       cb(err, null);
@@ -38,7 +45,6 @@ const deleteEntry = (courseNumber, cb) => {
       if (success.deletedCount === 0) {
         cb('record not located and therefore not delete');
       } else {
-        console.log('sucessfully deleted record inside of database', success);
         cb(null, success);
       }
     })
@@ -56,7 +62,6 @@ const insertEntry = (courseNumber, entry, cb) => {
       cb(null, success);
     })
     .catch((err) => {
-      console.error(err);
       cb(err, null);
     });
 };
@@ -69,7 +74,12 @@ const updateEntry = (courseNumber, edits, cb) => {
   // Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify` option set to false are deprecated (but successful)
   SyllabusModel.findOneAndUpdate(filter, edits, {new: true})
     .then((success) => {
-      cb(null, success);
+      if (!success) {
+        cb('success is null', null);
+      } else {
+        cb(null, success);
+      }
+
     })
     .catch((err) => {
       cb(err, null);
