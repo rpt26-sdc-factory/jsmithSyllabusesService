@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
-const SyllabusModel = require('./data/syllabusesModel');
+
+// commented out SyllabusModel and modeled directly inside of file because otherwise tests won't run;
+// tries to make two connections to mongodb
+
+// const SyllabusModel = require('./data/syllabusesModel');
+
+const syllabusesSchema = require('./data/syllabusesSchema.js');
+const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
 
 const hoursToComplete = (courseNumber, cb) => {
   SyllabusModel.findOne({ id: courseNumber })
