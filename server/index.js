@@ -43,7 +43,7 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
 
 // CREATE
 app.post('/api/syllabus/:courseNumber', (req, res) => {
-  console.log('POST /api/syllabus courseNumber: ', req.params.courseNumber);
+  // console.log('POST /api/syllabus courseNumber: ', req.params.courseNumber);
   db.insertEntry(req.params.courseNumber, req.body, (err, success) => {
     if (err) {
       res.sendStatus(405);
@@ -55,7 +55,7 @@ app.post('/api/syllabus/:courseNumber', (req, res) => {
 
 // UPDATE
 app.put('/api/syllabus/:courseNumber', (req, res) => {
-  console.log('PUT /api/syllabus courseNumber: ', req.params.courseNumber);
+  // console.log('PUT /api/syllabus courseNumber: ', req.params.courseNumber);
   db.updateEntry(req.params.courseNumber, req.body, (err, success) => {
     if (err) {
       res.sendStatus(405);
@@ -67,7 +67,7 @@ app.put('/api/syllabus/:courseNumber', (req, res) => {
 
 // DELETE
 app.delete('/api/syllabus/:courseNumber', (req, res) => {
-  console.log('DELETE /api/syllabus courseNumber: ', req.params.courseNumber);
+  // console.log('DELETE /api/syllabus courseNumber: ', req.params.courseNumber);
   db.deleteEntry(req.params.courseNumber, (err, success) => {
     if (err) {
       res.sendStatus(404);
@@ -77,7 +77,7 @@ app.delete('/api/syllabus/:courseNumber', (req, res) => {
   });
 });
 
-if (process.env.ENVIRONMENT !== 'test') {
+if (process.env.NODE_ENV.trim() !== 'test') {
   app.listen(port, () => {
     console.log(`Syllabus service listening at http://localhost:${port}`);
   });
