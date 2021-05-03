@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 // commented out SyllabusModel and modeled directly inside of file because otherwise tests won't run;
 // tries to make two connections to mongodb
+// put the difference between lines 7 and 9 / 10 inside of an if/else block related to which enviornment is being run ???
 
 // const SyllabusModel = require('./data/syllabusesModel');
 
@@ -12,12 +13,10 @@ const hoursToComplete = (courseNumber, cb) => {
   SyllabusModel.findOne({ id: courseNumber })
     .then((syllabusData) => {
       let hoursToCompleteCourse = syllabusData.toObject().hoursToCompleteCourse;
-      cb({ hoursToCompleteCourse });
+      cb(null, { hoursToCompleteCourse });
     })
     .catch((err) => {
-      if (err) {
-        console.error(err);
-      }
+      cb(err, null);
     });
 };
 
@@ -25,12 +24,10 @@ const syllabus = (courseNumber, cb) => {
   const options = {id: courseNumber};
   SyllabusModel.findOne(options)
     .then((syllabusData) => {
-      cb(syllabusData);
+      cb(null, syllabusData);
     })
     .catch((err) => {
-      if (err) {
-        console.error(err);
-      }
+      cb(err, null);
     });
 };
 
@@ -53,7 +50,7 @@ const deleteEntry = (courseNumber, cb) => {
 
 const insertEntry = (courseNumber, entry, cb) => {
 
-  // !!! make sure that courseNumber not already inside of database
+  // id is now a unique field so if duplicate entries attempted, error will be thrown
   SyllabusModel.create(entry)
     .then((success) => {
       cb(null, success);
@@ -65,8 +62,8 @@ const insertEntry = (courseNumber, entry, cb) => {
 };
 
 const updateEntry = (courseNumber, edits, cb) => {
+  // id is now a unique field so if duplicate entries attempted, error will be thrown
   const filter = {id: courseNumber};
-  // !!! make sure that courseNumber exists before trying to put
 
   // {new: true} means that document returned is the document after the edits have been applied
   // Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify` option set to false are deprecated (but successful)
@@ -75,10 +72,8 @@ const updateEntry = (courseNumber, edits, cb) => {
       cb(null, success);
     })
     .catch((err) => {
-      console.error(err);
       cb(err, null);
     })
-
 };
 
 module.exports.hoursToComplete = hoursToComplete;

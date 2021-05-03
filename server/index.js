@@ -18,18 +18,26 @@ app.get('/:courseNumber', (req, res) => {
 
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
   // console.log('GET /api/hoursToComplete courseNumber: ', req.params.courseNumber);
-  db.hoursToComplete(req.params.courseNumber, (responseData) => {
-    // add error first callback ?
-    res.send(responseData);
+  db.hoursToComplete(req.params.courseNumber, (err, responseData) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.status(202);
+      res.send(responseData);
+    }
   });
 });
 
 // READ
 app.get('/api/syllabus/:courseNumber', (req, res) => {
   // console.log('GET /api/syllabus courseNumber: ', req.params.courseNumber);
-  db.syllabus(req.params.courseNumber, (responseData) => {
-    // add error first callback ?
-    res.send(responseData);
+  db.syllabus(req.params.courseNumber, (err, responseData) => {
+    if (err) {
+      res.sendStatus(404);
+    } else {
+      res.status(202);
+      res.send(responseData);
+    }
   });
 });
 
@@ -69,9 +77,11 @@ app.delete('/api/syllabus/:courseNumber', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Syllabus service listening at http://localhost:${port}`);
-});
+if (process.env.ENVIRONMENT !== 'test') {
+  app.listen(port, () => {
+    console.log(`Syllabus service listening at http://localhost:${port}`);
+  });
+}
 
 module.exports.app = app;
 module.exports.port = port;
