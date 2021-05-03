@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const syllabusesSchema = require('../db/data/syllabusesSchema.js');
 const SyllabusModel = mongoose.model('syllabuses', syllabusesSchema);
 
-// const server = require('../server/index.js');
+const server = require('../server/index.js');
 const database = require('../db/index.js');
 
 // const url = `http://localhost:${server.port}`;
@@ -21,22 +21,16 @@ beforeAll(async () => {
 
 });
 
+beforeEach(async () => {
+  await SyllabusModel.insertMany(sampleData);
+});
+
 afterEach(async () => {
   await SyllabusModel.deleteMany();
 });
 
-beforeEach(async () => {
-  await SyllabusModel.insertMany(sampleData);
-})
-
-// it ('should save syllabus to database', async done => {
-//   console.log('inside of test');
-//   await SyllabusModel.insertMany(sampleData);
-//   done();
-// });
-
+// CREATE
 describe('Create', () =>  {
-
   it('should create a new record inside of the database', async done => {
     await database.insertEntry(6, sixEntry, async (err, success) => {
       if (err) {
@@ -50,63 +44,103 @@ describe('Create', () =>  {
   });
 });
 
-// describe('Read', () => {
+// READ
+describe('Read', () => {
+  it('should query for an existing record inside of the database', async done => {
+    await database.syllabus(1, async (err, success) => {
+      if (err) {
+        throw new Error('did not successfully query the database for an existing record');
+      } else {
+        expect(success.id).toBe(1);
+        expect(success.weeks.length).toBe(4);
+        expect(success.hoursToCompleteCourse).toBe(46);
+      }
+      done();
+    })
+  });
+
+  it('should return an error if record doesn\'t exist', async done => {
+    await database.syllabus(85, (err, success) => {
+      expect(success).toBeFalsy();
+      expect(err).toBeTruthy();
+    });
+    done();
+  });
+
+  it('should only return hoursToComplete for that route', async done => {
+    await database.hoursToComplete(5, (err, success) => {
+      if (err) {
+        throw new Error('did not successfully query the database for an existing record\'s hoursToCompleteCourse');
+      } else {
+        expect(success.hoursToCompleteCourse).toBe(13);
+      }
+      done();
+    })
+  });
+});
+
+// UPDATE
+describe('Update', () => {
+  it('should return an error if record doesn\'t exist and therefore can\'t be updated', async done => {
+    await database.updateEntry(66, {hoursToCompleteCourse: 45}, (err, success) => {
+      expect(err).toBeTruthy();
+      expect(success).toBeFalsy();
+      done();
+    })
+  });
+
+  it('should update value inside of database', async done => {
+    await database.updateEntry(5, {hoursToCompleteCourse: 466}, async (err, success) => {
+      if (err) {
+        throw new Error('did not successfully update the record');
+      } else {
+        let record = await SyllabusModel.findOne({id: 5});
+        expect(record.hoursToCompleteCourse).toBe(466);
+      }
+      done();
+    })
+  })
+
+});
+
+// DELETE
+describe('Delete', () => {
+
+  it('should delete record from the database', async done => {
+    await database.deleteEntry(1, async (err, success) => {
+      if (err) {
+        throw new Error('did not successfully delete record');
+      } else {
+        let record = await SyllabusModel.findOne({id: 1});
+        expect(record).toBeFalsy();
+      }
+      done();
+    });
+  });
+
+  it('should delete nothing from the database if no record matching the id exists', async done => {
+    await database.deleteEntry(562, (err, success) => {
+      expect(success).toBeFalsy();
+      expect(err).toBeTruthy();
+      done();
+    });
+  });
+
+  // // server
+  // test('if record matches id, success code attached to response', async done => {
+  //   let response = await request.delete('/api/syllabus/2');
+  //   expect(response.status).toBe(202);
+  // });
+
+  // // server
+  // test('if record doesn\'t match id, error code appears on response', async done => {
+  //   let response = await request.delete('/api/syllabus/888');
+  //   expect(response.status).toBe(404);
+  // });
+
+});
 
 
-// });
-
-// describe('Update', () => {
-
-
-// });
-// describe('Delete', () => {
-
-//   // database
-//   test('if record matches id, it is deleted from the database', async () => {
-//     let operation = databaseOperation.deleteEntry(1, (err, success) => {
-//       if (err) {
-//         return false;
-//       } else {
-//         return true;
-//       }
-//     });
-//     expect(operation).toBeTruthy();
-//   });
-
-//   // database
-//   test('if no records match the id, nothing is deleted from the database', async () => {
-//     let operation = databaseOperation.deleteEntry(562, (err, success) => {
-//       if (err) {
-//         return false;
-//       } else {
-//         return true;
-//       }
-//     });
-//     expect(operation).toBeFalsy();
-//   });
-
-//   // server
-//   test('if record matches id, success code attached to response', async done => {
-//     let response = await request.delete('/api/syllabus/2');
-//     expect(response.status).toBe(202);
-//   });
-
-//   // server
-//   test('if record doesn\'t match id, error code appears on response', async done => {
-//     let response = await request.delete('/api/syllabus/888');
-//     expect(response.status).toBe(404);
-//   });
-
-//   afterAll(async () => {
-//     // add the two entries that were deleted back to the database
-//     databaseOperation.insertEntry(1, firstEntry);
-//     databaseOperation.insertEntry(2, secondEntry);
-//   });
-
-// });
-
-
-// // VALUES TO BE RESTORED
 const sixEntry = {
   "id": 6,
   "weeks": [
@@ -224,7 +258,7 @@ const sixEntry = {
       ]
     }
   ],
-  "hoursToCompleteCourse": 10
+  "hoursToCompleteCourse": 100
 };
 
 const sevenEntry = {
@@ -349,5 +383,5 @@ const sevenEntry = {
       ]
     }
   ],
-  "hoursToCompleteCourse": 10
+  "hoursToCompleteCourse": 16
 };
