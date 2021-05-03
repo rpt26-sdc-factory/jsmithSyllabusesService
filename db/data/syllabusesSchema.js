@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const syllabusSchema = new Schema({
-  id: Number,
+  id: {
+    type: Number,
+    required: true,
+    unique: true
+  },
   weeks: [{
     weekNumber: Number,
     lessons: [{
