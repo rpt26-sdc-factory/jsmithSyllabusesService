@@ -10,7 +10,7 @@ req.body // is a JSON object containing the data to be inserted into the databas
 ```
 
 ## Read
-returns a status code of 200 if request received
+returns a status code of 202 if request received; returns a status code of 404 if not successfully retrieved
 
 
 * GET /api/hoursToComplete/:courseNumber
