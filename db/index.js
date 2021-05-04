@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 // SyllabusModel needs to be declared ahead of time else tests error because undefined variable
 // ideally, should be a constant but alas...
 var SyllabusModel;
-
 if (process.env.NODE_ENV.trim() !== 'test') {
   SyllabusModel = require('./data/syllabusesModel');
 } else {
