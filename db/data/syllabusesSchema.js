@@ -8,8 +8,9 @@ const syllabusSchema = new Schema({
     unique: true
   },
   weeks: [{
-    weekNumber: Number,
+    weekIndex: Number,
     lessons: [{
+      lessonIndex: Number,
       hoursToCompleteLesson: Number,
       lessonTitle: String,
       lessonDescription: String,
@@ -32,7 +33,8 @@ const syllabusSchema = new Schema({
         exerciseLengthMinutes: Number
       }],
       exercisesLength: Number
-    }]
+    }],
+    hoursToCompleteWeek: Number
   }],
   hoursToCompleteCourse: Number
 });
