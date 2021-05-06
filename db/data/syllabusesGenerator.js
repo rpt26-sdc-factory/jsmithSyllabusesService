@@ -175,17 +175,17 @@ function generateSyllabi(startIndex, numSyllabiToCreate) {
 
 function generateSyllabus(id) {
   let numberOfWeeks = Math.ceil(Math.random() * 4);
-  let hoursToCompleteCourse = 0;
+  let hoursToCompleteCourse = Math.floor(Math.random() * (500)) + 1;
   let returnValue = generateWeeks(numberOfWeeks).then(weeks => {
-    for (let week of weeks) {
-      hoursToCompleteCourse += week.hoursToCompleteWeek;
-    }
-    let syllabus = {
-      id,
-      weeks,
-      hoursToCompleteCourse
-    };
-    return syllabus;
+    // for (let week of weeks) {
+    //   hoursToCompleteCourse += week.hoursToCompleteWeek;
+    // }
+  let syllabus = {
+    id,
+    weeks,
+    hoursToCompleteCourse
+  };
+  return syllabus;
   }).catch(err => console.log('error while generating weeks: ', err));
 
   return Promise.resolve(returnValue);
@@ -201,11 +201,11 @@ function generateWeeks(numberOfWeeks) {
 
 function generateWeek(weekIndex) {
   let numberOfLessonsThisWeek = Math.ceil(Math.random() * 2);
-  let hoursToCompleteWeek = 0;
+  let hoursToCompleteWeek = Math.floor(Math.random() * (100)) + 1;
   let returnVal = generateLessons(numberOfLessonsThisWeek).then(lessons => {
-    for (let lesson of lessons) {
-      hoursToCompleteWeek += lesson.hoursToCompleteLesson;
-    }
+    // for (let lesson of lessons) {
+    //   hoursToCompleteWeek += lesson.hoursToCompleteLesson;
+    // }
     let week = {
       weekIndex,
       lessons,
@@ -251,20 +251,20 @@ function generateLesson(lessonIndex, starters) {
   let numberOfReadings = Math.ceil(Math.random() * 3);
   let numberOfExercises = Math.ceil(Math.random() * 4);
 
-  let videosSeconds = 0;
-  let videosLength = 0; //in minutes
-  let readingsLength = 0; //in minutes
-  let exercisesLength = 0; //in minutes
+  let videosSeconds = Math.floor(Math.random() * (60));
+  let videosLength = Math.floor(Math.random() * (60)); //in minutes
+  let readingsLength = Math.floor(Math.random() * (60)); //in minutes
+  let exercisesLength = Math.floor(Math.random() * (60)); //in minutes
 
   // VIDEOS
   let videos = [];
   promises.push(generateVideos.call(null, numberOfVideos).then(generated => {
     videos = generated;
-    for (let video of generated) {
-      videosSeconds += video.videoLengthSeconds;
-      videosLength += video.videoLengthMinutes;
-    }
-    videosLength += (videosSeconds -= videosSeconds % 60) / 60;
+    // for (let video of generated) {
+    //   videosSeconds += video.videoLengthSeconds;
+    //   videosLength += video.videoLengthMinutes;
+    // }
+    // videosLength += (videosSeconds -= videosSeconds % 60) / 60;
     return Promise.resolve(generated);
   }).catch(err => console.log('err while generating videos: ', err)));
 
@@ -272,9 +272,9 @@ function generateLesson(lessonIndex, starters) {
   let readings = [];
   promises.push(generateReadings.call(null, numberOfReadings).then(generated => {
     readings = generated;
-    for (let reading of generated) {
-      readingsLength += reading.readingLengthMinutes
-    }
+    // for (let reading of generated) {
+    //   readingsLength += reading.readingLengthMinutes
+    // }
     return Promise.resolve(generated);
   }).catch(err => console.log('error while generating readings: ', err)));
 
@@ -282,22 +282,22 @@ function generateLesson(lessonIndex, starters) {
   let exercises = [];
   promises.push(generateExercises.call(null, numberOfExercises).then(generated => {
     exercises = generated;
-    for (let exercise of generated) {
-      exercisesLength += exercise.exerciseLengthMinutes;
-    }
+    // for (let exercise of generated) {
+    //   exercisesLength += exercise.exerciseLengthMinutes;
+    // }
     return Promise.resolve(generated);
   }).catch(err => console.log('error while generating exercises: ', err)));
 
   let minutesToComplete = 0;
 
   return Promise.all(promises).then(() => {
-    minutesToComplete = videosLength + readingsLength + exercisesLength;
-    if (minutesToComplete % 60 < 30) {
-      minutesToComplete -= minutesToComplete % 60;
-    } else {
-      minutesToComplete += minutesToComplete % 60;
-    }
-    hoursToCompleteLesson = Math.floor(minutesToComplete / 60);
+    // minutesToComplete = videosLength + readingsLength + exercisesLength;
+    // if (minutesToComplete % 60 < 30) {
+    //   minutesToComplete -= minutesToComplete % 60;
+    // } else {
+    //   minutesToComplete += minutesToComplete % 60;
+    // }
+    // hoursToCompleteLesson = Math.floor(minutesToComplete / 60);
 
     let lesson = {
       lessonIndex,
