@@ -153,72 +153,62 @@ const fs = require('fs');
 // generateSyllabuses();
 
 // BENCHMARKING START
-// let bulkGenerationAndInsertion = [10, 100, 1000, 10000];
-// console.log('BENCHMARKING CURRENT GENERATION SCRIPT:');
-// for (let num of bulkGenerationAndInsertion) {
-//   var start = new Date().getTime();
-//   generateSyllabi(0, num);
-//   var end = new Date().getTime();
-//   console.log(`For num of ${num} the elapsed time was: "${end - start}"`);
-// }
+let bulkGenerationAndInsertion = [10, 100, 1000, 10000];
+console.log('BENCHMARKING CURRENT GENERATION SCRIPT:');
+for (let num of bulkGenerationAndInsertion) {
+  var start = new Date().getTime();
+  generateSyllabi(0, num);
+  var end = new Date().getTime();
+  console.log(`For num of ${num} the elapsed time was: "${end - start}"`);
+}
 // BENCHMARKING END
 
 
 function generateSyllabi(startIndex, numSyllabiToCreate) {
-  let promises = [];
+  let syllabi = [];
   let endIndex = startIndex + numSyllabiToCreate;
   for (let id = startIndex; id < endIndex; id++) {
-    promises.push(generateSyllabus.call(null, id));
+    syllabi.push(generateSyllabus.call(null, id));
   }
-  return Promise.all(promises);
+  return syllabi;
 }
 
 function generateSyllabus(id) {
   let numberOfWeeks = Math.ceil(Math.random() * 4);
   let hoursToCompleteCourse = Math.floor(Math.random() * (500)) + 1;
-  let returnValue = generateWeeks(numberOfWeeks).then(weeks => {
-    // for (let week of weeks) {
-    //   hoursToCompleteCourse += week.hoursToCompleteWeek;
-    // }
+  let weeks = generateWeeks(numberOfWeeks);
   let syllabus = {
     id,
     weeks,
     hoursToCompleteCourse
   };
   return syllabus;
-  }).catch(err => console.log('error while generating weeks: ', err));
-
-  return Promise.resolve(returnValue);
 }
 
 function generateWeeks(numberOfWeeks) {
-  let promises = [];
+  let weeks = [];
   for (let weekIndex = 0; weekIndex < numberOfWeeks; weekIndex++) {
-    promises.push(generateWeek.call(null, weekIndex));
+    weeks.push(generateWeek.call(null, weekIndex));
   }
-  return Promise.all(promises);
+  return weeks;
 }
 
 function generateWeek(weekIndex) {
   let numberOfLessonsThisWeek = Math.ceil(Math.random() * 2);
   let hoursToCompleteWeek = Math.floor(Math.random() * (100)) + 1;
-  let returnVal = generateLessons(numberOfLessonsThisWeek).then(lessons => {
-    // for (let lesson of lessons) {
-    //   hoursToCompleteWeek += lesson.hoursToCompleteLesson;
-    // }
-    let week = {
-      weekIndex,
-      lessons,
-      hoursToCompleteWeek
-    }
-    return week;
-  }).catch(err => console.log('error while generating lessons: ', err));
+  let lessons = generateLessons(numberOfLessonsThisWeek);
 
-  return Promise.resolve(returnVal);
+  let week = {
+    weekIndex,
+    lessons,
+    hoursToCompleteWeek
+  }
+
+  return week;
 }
 
 function generateLessons(numberOfLessonsThisWeek) {
-  let promises = [];
+  let lessons = [];
   let starters = [
     'Basics of',
     'Steps to',
@@ -229,9 +219,9 @@ function generateLessons(numberOfLessonsThisWeek) {
     'Types of'
   ];
   for (let lessonIndex = 0; lessonIndex <= numberOfLessonsThisWeek; lessonIndex++) {
-    promises.push(generateLesson.call(null, lessonIndex, starters));
+    lessons.push(generateLesson.call(null, lessonIndex, starters));
   }
-  return Promise.all(promises);
+  return lessons;
 }
 
 function generateLesson(lessonIndex, starters) {
@@ -257,40 +247,18 @@ function generateLesson(lessonIndex, starters) {
   let exercisesLength = Math.floor(Math.random() * (60)); //in minutes
 
   // VIDEOS
-  let videos = [];
-  promises.push(generateVideos.call(null, numberOfVideos).then(generated => {
-    videos = generated;
-    // for (let video of generated) {
-    //   videosSeconds += video.videoLengthSeconds;
-    //   videosLength += video.videoLengthMinutes;
-    // }
-    // videosLength += (videosSeconds -= videosSeconds % 60) / 60;
-    return Promise.resolve(generated);
-  }).catch(err => console.log('err while generating videos: ', err)));
+  let videos = generateVideos.call(null, numberOfVideos);
 
   // READINGS
-  let readings = [];
-  promises.push(generateReadings.call(null, numberOfReadings).then(generated => {
-    readings = generated;
-    // for (let reading of generated) {
-    //   readingsLength += reading.readingLengthMinutes
-    // }
-    return Promise.resolve(generated);
-  }).catch(err => console.log('error while generating readings: ', err)));
+  let readings = generateReadings.call(null, numberOfReadings);
 
   // EXERCISES
-  let exercises = [];
-  promises.push(generateExercises.call(null, numberOfExercises).then(generated => {
-    exercises = generated;
-    // for (let exercise of generated) {
-    //   exercisesLength += exercise.exerciseLengthMinutes;
-    // }
-    return Promise.resolve(generated);
-  }).catch(err => console.log('error while generating exercises: ', err)));
+  let exercises = generateExercises.call(null, numberOfExercises);
 
-  let minutesToComplete = 0;
 
-  return Promise.all(promises).then(() => {
+  // let minutesToComplete = 0;
+
+  // return Promise.all(promises).then(() => {
     // minutesToComplete = videosLength + readingsLength + exercisesLength;
     // if (minutesToComplete % 60 < 30) {
     //   minutesToComplete -= minutesToComplete % 60;
@@ -299,32 +267,33 @@ function generateLesson(lessonIndex, starters) {
     // }
     // hoursToCompleteLesson = Math.floor(minutesToComplete / 60);
 
-    let lesson = {
-      lessonIndex,
-      hoursToCompleteLesson,
-      lessonTitle,
-      lessonDescription,
-      videos,
-      videosLength,
-      readings,
-      readingsLength,
-      exercises,
-      exercisesLength
-    }
 
-    return lesson;
-  }).catch(err => console.log('error while making lessons: ', err));
+  // }).catch(err => console.log('error while making lessons: ', err));
 
+  let lesson = {
+    lessonIndex,
+    hoursToCompleteLesson,
+    lessonTitle,
+    lessonDescription,
+    videos,
+    videosLength,
+    readings,
+    readingsLength,
+    exercises,
+    exercisesLength
+  }
+
+  return lesson;
 
   // return Promise.resolve(lesson);
 }
 
 function generateVideos(numberOfVideos) {
-  let promises = [];
+  let videos = [];
   for (let videoIndex = 0; videoIndex < numberOfVideos; videoIndex++) {
-    promises.push(generateVideo.call(null, videoIndex));
+    videos.push(generateVideo.call(null, videoIndex));
   }
-  return Promise.all(promises);
+  return videos;
 }
 
 function generateVideo(videoIndex) {
@@ -338,15 +307,15 @@ function generateVideo(videoIndex) {
     videoLengthSeconds: Math.ceil(Math.random() * 58)
   };
 
-  return Promise.resolve(video);
+  return video;
 }
 
 function generateReadings(numberOfReadings) {
-  let promises = [];
+  let readings = [];
   for (let readingIndex = 0; readingIndex < numberOfReadings; readingIndex++) {
-    promises.push(generateReading.call(null, readingIndex));
+    readings.push(generateReading.call(null, readingIndex));
   }
-  return Promise.all(promises);
+  return readings;
 }
 
 function generateReading(readingIndex) {
@@ -365,11 +334,11 @@ function generateReading(readingIndex) {
     readingTitle,
     readingLengthMinutes
   };
-  return Promise.resolve(reading);
+  return reading;
 }
 
 function generateExercises(numberOfExercises) {
-  let promises = [];
+  let exercises = [];
   let starters = [
     'Basics of',
     'Steps to',
@@ -381,9 +350,9 @@ function generateExercises(numberOfExercises) {
   ];
 
   for (let exerciseIndex = 0; exerciseIndex < numberOfExercises; exerciseIndex++) {
-    promises.push(generateExercise.call(null, exerciseIndex, starters));
+    exercises.push(generateExercise.call(null, exerciseIndex, starters));
   }
-  return Promise.all(promises);
+  return exercises;
 };
 
 function generateExercise(exerciseIndex, starters) {
@@ -395,7 +364,7 @@ function generateExercise(exerciseIndex, starters) {
     exerciseTitle,
     exerciseLengthMinutes
   };
-  return Promise.resolve(exercise);
+  return exercise;
 }
 
 // CONSOLE TESTING
@@ -403,11 +372,8 @@ function generateExercise(exerciseIndex, starters) {
 //   console.log(JSON.stringify(results));
 // }).catch(err => console.log(err));
 
-let startingIndex = Number.parseInt(process.argv[2]);
-let numOfEntries = Number.parseInt(process.argv[3]);
+// let startingIndex = Number.parseInt(process.argv[2]);
+// let numOfEntries = Number.parseInt(process.argv[3]);
 
-generateSyllabi(startingIndex, numOfEntries).then(results => {
-  console.log(JSON.stringify(results));
-}).catch(err => {
-  console.log(err);
-});
+
+// console.log(JSON.stringify(generateSyllabi(startingIndex, numOfEntries)));
