@@ -166,7 +166,8 @@ const fs = require('fs');
 
 function generateSyllabi(startIndex, numSyllabiToCreate) {
   let promises = [];
-  for (let id = startIndex; id < startIndex + numSyllabiToCreate; id++) {
+  let endIndex = startIndex + numSyllabiToCreate;
+  for (let id = startIndex; id < endIndex; id++) {
     promises.push(generateSyllabus.call(null, id));
   }
   return Promise.all(promises);
@@ -401,3 +402,12 @@ function generateExercise(exerciseIndex, starters) {
 // generateSyllabi(0, 1).then(results => {
 //   console.log(JSON.stringify(results));
 // }).catch(err => console.log(err));
+
+let startingIndex = Number.parseInt(process.argv[2]);
+let numOfEntries = Number.parseInt(process.argv[3]);
+
+generateSyllabi(startingIndex, numOfEntries).then(results => {
+  console.log(JSON.stringify(results));
+}).catch(err => {
+  console.log(err);
+});
