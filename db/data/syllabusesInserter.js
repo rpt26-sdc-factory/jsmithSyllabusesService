@@ -8,8 +8,9 @@ let syllabusesInsert = () => {
   syllabusesModel.insertMany(syllabusesData, (err) => {
     if (err) {
       console.error(err);
+    } else {
+      console.log('syllabusesInsert success');
     }
-    console.log('syllabusesInsert success');
     mongoose.connection.close();
   });
 };
