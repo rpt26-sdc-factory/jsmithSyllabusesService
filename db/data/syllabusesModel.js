@@ -8,6 +8,7 @@ const MONGO_HOSTNAME = process.env.MONGO_HOSTNAME || 'localhost';
 const MONGO_PORT = process.env.MONGO_PORT || 27017;
 const MONGO_DB = process.env.MONGO_DB || 'syllabuses';
 
+// possible changee useUnifiedTopology: true to false in order to pass jest tests
 mongoose.connect(`mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const db = mongoose.connection;
