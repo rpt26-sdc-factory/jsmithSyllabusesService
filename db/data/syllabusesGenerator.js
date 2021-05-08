@@ -1,16 +1,15 @@
-const faker = require('faker');
+const faker = require('faker/locale/en');
 const fs = require('fs');
 
-
 // BENCHMARKING START
-let bulkGenerationAndInsertion = [10, 100, 1000, 10000];
-console.log('BENCHMARKING CURRENT GENERATION SCRIPT:');
-for (let num of bulkGenerationAndInsertion) {
-  var start = new Date().getTime();
-  generateSyllabi(0, num);
-  var end = new Date().getTime();
-  console.log(`For num of ${num} the elapsed time was: "${end - start}"`);
-}
+// let bulkGenerationAndInsertion = [10, 100, 1000, 10000];
+// console.log('BENCHMARKING CURRENT GENERATION SCRIPT:');
+// for (let num of bulkGenerationAndInsertion) {
+//   var start = new Date().getTime();
+//   generateSyllabi(0, num);
+//   var end = new Date().getTime();
+//   console.log(`For num of ${num} the elapsed time was: "${end - start}"`);
+// }
 // BENCHMARKING END
 
 
@@ -18,19 +17,18 @@ function generateSyllabi(startIndex, numSyllabiToCreate) {
   let syllabi = [];
   let endIndex = startIndex + numSyllabiToCreate;
   for (let id = startIndex; id < endIndex; id++) {
-    syllabi.push(generateSyllabus.call(null, id));
+    syllabi.push(generateSyllabus(id));
   }
   return syllabi;
 }
 
 function generateSyllabus(id) {
-  let numberOfWeeks = Math.ceil(Math.random() * 4);
-  let hoursToCompleteCourse = Math.floor(Math.random() * (500)) + 1;
-  let weeks = generateWeeks(numberOfWeeks);
+  // 1 or 2 weeks will be created
+  let numberOfWeeks = Math.floor(Math.random() * 2 + 1);
   let syllabus = {
-    id,
-    weeks,
-    hoursToCompleteCourse
+    id: id,
+    weeks: generateWeeks(numberOfWeeks),
+    hoursToCompleteCourse: Math.floor(Math.random() * 500 + 1)
   };
   return syllabus;
 }
@@ -38,20 +36,19 @@ function generateSyllabus(id) {
 function generateWeeks(numberOfWeeks) {
   let weeks = [];
   for (let weekIndex = 0; weekIndex < numberOfWeeks; weekIndex++) {
-    weeks.push(generateWeek.call(null, weekIndex));
+    weeks.push(generateWeek(weekIndex));
   }
   return weeks;
 }
 
 function generateWeek(weekIndex) {
-  let numberOfLessonsThisWeek = Math.ceil(Math.random() * 2);
-  let hoursToCompleteWeek = Math.floor(Math.random() * (100)) + 1;
-  let lessons = generateLessons(numberOfLessonsThisWeek);
+  // need to remove the number of secondary records in order to generate 10 million primary records in under 30 minutes
+  // let numberOfLessonsThisWeek = Math.floor(Math.random() * 2 + 1);
 
   let week = {
-    weekIndex,
-    lessons,
-    hoursToCompleteWeek
+    weekIndex: weekIndex,
+    lessons: generateLessons(1),
+    hoursToCompleteWeek: Math.floor(Math.random() * 100 + 1)
   }
 
   return week;
@@ -59,85 +56,51 @@ function generateWeek(weekIndex) {
 
 function generateLessons(numberOfLessonsThisWeek) {
   let lessons = [];
-  // let starters = [
-  //   'Basics of',
-  //   'Steps to',
-  //   'Ethics of',
-  //   'Skills for',
-  //   'What is',
-  //   'Building',
-  //   'Types of'
-  // ];
-  for (let lessonIndex = 0; lessonIndex <= numberOfLessonsThisWeek; lessonIndex++) {
-    lessons.push(generateLesson.call(null, lessonIndex));
+
+  for (let lessonIndex = 0; lessonIndex < numberOfLessonsThisWeek; lessonIndex++) {
+    lessons.push(generateLesson(lessonIndex));
   }
   return lessons;
 }
 
 function generateLesson(lessonIndex) {
-  // let promises = [];
-  let hoursToCompleteLesson = 0;
+  // 1 to 4 fake words
+  let numberOfFakeWords = Math.floor(Math.random() * 4 + 1);
 
-  let lessonDescription = faker.lorem.paragraph();
-  let numberOfFakeWords = Math.ceil(Math.random() * 4);
-
-  //create lessonTitle
-  let lessonTitle = faker.random.words(numberOfFakeWords);
-
-  let numberOfVideos = Math.ceil(Math.random() * 2);
-  let numberOfReadings = Math.ceil(Math.random() * 3);
-  let numberOfExercises = Math.ceil(Math.random() * 4);
-
-  let videosSeconds = Math.floor(Math.random() * (60));
-  let videosLength = Math.floor(Math.random() * (60)); //in minutes
-  let readingsLength = Math.floor(Math.random() * (60)); //in minutes
-  let exercisesLength = Math.floor(Math.random() * (60)); //in minutes
-
-  // VIDEOS
-  let videos = generateVideos.call(null, numberOfVideos);
-
-  // READINGS
-  let readings = generateReadings.call(null, numberOfReadings);
-
-  // EXERCISES
-  let exercises = generateExercises.call(null, numberOfExercises);
-
-
+  // let numberOfVideos = Math.floor(Math.random() * 2 + 1);
+  // let numberOfReadings = Math.floor(Math.random() * 3 + 1);
+  // let numberOfExercises = Math.floor(Math.random() * 4 + 1);
 
   let lesson = {
-    lessonIndex,
-    hoursToCompleteLesson,
-    lessonTitle,
-    lessonDescription,
-    videos,
-    videosLength,
-    readings,
-    readingsLength,
-    exercises,
-    exercisesLength
+    lessonIndex: lessonIndex,
+    hoursToCompleteLesson: Math.floor(Math.random() * 10 + 1),
+    lessonTitle: faker.random.words(numberOfFakeWords),
+    lessonDescription: faker.lorem.paragraph(),
+    videos: generateVideos(1),
+    videosLength: Math.floor(Math.random() * 60 + 1),
+    readings: generateReadings(1),
+    readingsLength: Math.floor(Math.random() * 60 + 1),
+    exercises: generateExercises(1),
+    exercisesLength: Math.floor(Math.random() * 60 + 1)
   }
 
   return lesson;
-
-  // return Promise.resolve(lesson);
 }
 
 function generateVideos(numberOfVideos) {
   let videos = [];
   for (let videoIndex = 0; videoIndex < numberOfVideos; videoIndex++) {
-    videos.push(generateVideo.call(null, videoIndex));
+    videos.push(generateVideo(videoIndex));
   }
   return videos;
 }
 
 function generateVideo(videoIndex) {
-  let videoTitle = faker.company.catchPhraseAdjective() + ' ' + faker.hacker.verb() + ' ' + faker.hacker.noun();
-
   let video = {
-    videoIndex,
-    videoTitle,
-    videoLengthMinutes: Math.ceil(Math.random() * 90),
-    videoLengthSeconds: Math.ceil(Math.random() * 58)
+    videoIndex: videoIndex,
+    videoTitle: faker.company.catchPhraseAdjective() + ' ' + faker.hacker.verb() + ' ' + faker.hacker.noun(),
+    videoLengthMinutes: Math.floor(Math.random() * 90 + 1),
+    videoLengthSeconds: Math.floor(Math.random() * 59 + 1)
   };
 
   return video;
@@ -146,56 +109,36 @@ function generateVideo(videoIndex) {
 function generateReadings(numberOfReadings) {
   let readings = [];
   for (let readingIndex = 0; readingIndex < numberOfReadings; readingIndex++) {
-    readings.push(generateReading.call(null, readingIndex));
+    readings.push(generateReading(readingIndex));
   }
   return readings;
 }
 
 function generateReading(readingIndex) {
-  let readingLengthMinutes = Math.ceil(Math.random() * 75);
-  let numberOfFakeWords = Math.ceil(Math.random() * 4);
-
-  let readingTitle = faker.random.words(numberOfFakeWords);
-
-  // for (let i = 0; i <= numberOfFakeWords; i++) {
-  //   readingTitle = readingTitle.concat(faker.random.word(), ' ');
-  // }
-  // readingTitle = readingTitle.trimEnd();
+  let numberOfFakeWords = Math.floor(Math.random() * 4 + 1);
 
   let reading = {
-    readingIndex,
-    readingTitle,
-    readingLengthMinutes
+    readingIndex: readingIndex,
+    readingTitle: faker.random.words(numberOfFakeWords),
+    readingLengthMinutes: Math.floor(Math.random() * 75 + 1)
   };
   return reading;
 }
 
 function generateExercises(numberOfExercises) {
   let exercises = [];
-  // let starters = [
-  //   'Basics of',
-  //   'Steps to',
-  //   'Ethics of',
-  //   'Skills for',
-  //   'What is',
-  //   'Building',
-  //   'Types of'
-  // ];
 
   for (let exerciseIndex = 0; exerciseIndex < numberOfExercises; exerciseIndex++) {
-    exercises.push(generateExercise.call(null, exerciseIndex));
+    exercises.push(generateExercise(exerciseIndex));
   }
   return exercises;
 };
 
 function generateExercise(exerciseIndex) {
-  // let starterIndex = Math.floor(Math.random() * starters.length);
-  let exerciseTitle = faker.company.catchPhraseDescriptor() + ' ' + faker.hacker.verb() + ' ' + faker.hacker.adjective() + ' ' + faker.hacker.noun();
-  let exerciseLengthMinutes = Math.ceil(Math.random() * 75);
   let exercise = {
-    exerciseIndex,
-    exerciseTitle,
-    exerciseLengthMinutes
+    exerciseIndex: exerciseIndex,
+    exerciseTitle: faker.company.catchPhraseDescriptor() + ' ' + faker.hacker.verb() + ' ' + faker.hacker.adjective() + ' ' + faker.hacker.noun(),
+    exerciseLengthMinutes:  Math.floor(Math.random() * 75 + 1)
   };
   return exercise;
 }
@@ -206,3 +149,18 @@ function generateExercise(exerciseIndex) {
 // let numOfEntries = Number.parseInt(process.argv[3]);
 
 // console.log(JSON.stringify(generateSyllabi(startingIndex, numOfEntries)));
+
+module.exports = {
+  generateExercise,
+  generateExercises,
+  generateReading,
+  generateReadings,
+  generateVideo,
+  generateVideos,
+  generateLesson,
+  generateLessons,
+  generateWeek,
+  generateWeeks,
+  generateSyllabus,
+  generateSyllabi
+}
