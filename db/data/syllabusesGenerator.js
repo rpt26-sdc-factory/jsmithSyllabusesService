@@ -3,14 +3,20 @@ const fs = require('fs');
 
 // BENCHMARKING START
 // let bulkGenerationAndInsertion = [10, 100, 1000, 10000];
+// let bulkGenerationAndInsertion = [500000];
 // console.log('BENCHMARKING CURRENT GENERATION SCRIPT:');
 // for (let num of bulkGenerationAndInsertion) {
 //   var start = new Date().getTime();
-//   generateSyllabi(0, num);
+//   var syllabi = generateSyllabi(0, num);
 //   var end = new Date().getTime();
 //   console.log(`For num of ${num} the elapsed time was: "${end - start}"`);
 // }
 // BENCHMARKING END
+
+// CONSOLE TESTING
+// let startingIndex = Number.parseInt(process.argv[2]);
+// let numOfEntries = Number.parseInt(process.argv[3]);
+// console.log(JSON.stringify(generateSyllabi(startingIndex, numOfEntries)));
 
 
 function generateSyllabi(startIndex, numSyllabiToCreate) {
@@ -142,13 +148,6 @@ function generateExercise(exerciseIndex) {
   };
   return exercise;
 }
-
-// CONSOLE TESTING
-
-// let startingIndex = Number.parseInt(process.argv[2]);
-// let numOfEntries = Number.parseInt(process.argv[3]);
-
-// console.log(JSON.stringify(generateSyllabi(startingIndex, numOfEntries)));
 
 module.exports = {
   generateExercise,
