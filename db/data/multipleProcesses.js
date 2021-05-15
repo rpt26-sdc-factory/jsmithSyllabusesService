@@ -1,7 +1,8 @@
 const syllabusesGenerator = require('./syllabusesGenerator');
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
-const writer = csvWriter({sendHeaders: false});
+// changed separator from comma to pipe for Cassandra, because otherwise will identify more than two rows due to nested objects
+const writer = csvWriter({ separator: '|', sendHeaders: false});
 
 // const childProcess = require('child_process');
 // path is not relative to location of file ???
@@ -32,12 +33,12 @@ function generateCVS(writer, encoding, callback) {
   }
 }
 
-console.log('CSV GENERATION SCRIPT:');
-let fileName = 'syllabi-data-10million';
-writer.pipe(fs.createWriteStream(`${fileName}.csv`, {flags: 'a'}));
-var start = new Date().getTime();
-generateCVS(writer, 'utf8', () => {
-  writer.end();
-  var end = new Date().getTime();
-  console.log(`The elapsed time was: "${end - start}"`);
-});
+// console.log('CSV GENERATION SCRIPT:');
+// let fileName = 'syllabi-data-pipeSeparator-10million';
+// writer.pipe(fs.createWriteStream(`${fileName}.csv`, {flags: 'a'}));
+// var start = new Date().getTime();
+// generateCVS(writer, 'utf8', () => {
+//   writer.end();
+//   var end = new Date().getTime();
+//   console.log(`The elapsed time was: "${end - start}"`);
+// });
