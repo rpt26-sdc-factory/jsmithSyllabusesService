@@ -1,3 +1,7 @@
+-- brew services start postgresql
+-- psql postgres
+-- \i /Users/kimberly/Documents/galvanize/kim-syllabi-service/db/postgres/postgres.sql
+
 DROP DATABASE IF EXISTS SDC;
 CREATE DATABASE SDC;
 
@@ -8,4 +12,4 @@ CREATE TABLE syllabi (
   syllabus jsonb
 );
 
-\copy syllabi FROM 'syllabi-data-10million.csv' WITH (FORMAT csv, HEADER);
+\copy syllabi FROM '/Users/kimberly/Documents/galvanize/kim-syllabi-service/syllabi-data-10million.csv' WITH (FORMAT csv, HEADER);
