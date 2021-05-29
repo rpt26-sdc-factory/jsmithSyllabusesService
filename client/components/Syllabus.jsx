@@ -18,6 +18,7 @@ class Syllabus extends React.Component {
       syllabusPort,
       courseNumber,
       imagesPort,
+      imagesURL,
       reviewsURL,
       reviewsPort,
     } = this.state;
@@ -28,21 +29,21 @@ class Syllabus extends React.Component {
       .then((responseJSON) => { this.setState({ syllabusData: responseJSON }); })
       .catch((err) => { if (err) { console.error('Error in GET syllabus', err); } });
 
-    fetch(`http://${servicesURL}:${imagesPort}/api/svgs`, options)
+    fetch(`http://${imagesURL}:${imagesPort}/api/svgs`, options)
       .then(responseData => responseData.json())
       .then(responseJSON => this.setState({ svgsData: responseJSON }))
       .catch((err) => { if (err) { console.error('Error in GET svgs', err); } });
 
-    fetch(`http://${reviewsURL}:${reviewsPort}/api/totalReviewScore/${courseNumber}`, options)
-      .then(responseData => responseData.json())
-      .then((responseJSON) => {
-        const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
-        const fourStar = parseInt(responseJSON.fourStarPercent.split('%')[0]);
-        const positiveReviews = (fiveStar + fourStar).toString().concat('%');
-        const reviewCount = responseJSON.reviewCount;
-        this.setState({ positiveReviews, reviewCount });
-      })
-      .catch((err) => { if (err) { console.error('Error in GET starReviews', err); } });
+    // fetch(`http://${reviewsURL}:${reviewsPort}/api/totalReviewScore/${courseNumber}`, options)
+    //   .then(responseData => responseData.json())
+    //   .then((responseJSON) => {
+    //     const fiveStar = parseInt(responseJSON.fiveStarPercent.split('%')[0]);
+    //     const fourStar = parseInt(responseJSON.fourStarPercent.split('%')[0]);
+    //     const positiveReviews = (fiveStar + fourStar).toString().concat('%');
+    //     const reviewCount = responseJSON.reviewCount;
+    //     this.setState({ positiveReviews, reviewCount });
+    //   })
+    //   .catch((err) => { if (err) { console.error('Error in GET starReviews', err); } });
   }
 
   //sets initial state, then sets courseNumber from window, then fetches data
