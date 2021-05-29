@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const db = require('../db/index.js');
+const db = require('../db/postgres/index.js');
 const path = require('path');
 const cors = require('cors');
 const app = express();
@@ -16,12 +16,16 @@ app.get('/:courseNumber', (req, res) => {
   res.sendFile(path.resolve('./public/index.html'));
 });
 
+// hoursToComplete is processed by the app;
+// divided by 60 to get the displayed hoursToComplete
+// so technically this is minutesToComplete...
 app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
   // console.log('GET /api/hoursToComplete courseNumber: ', req.params.courseNumber);
-  db.hoursToComplete(req.params.courseNumber, (err, responseData) => {
+  db.getHoursToComplete(req.params.courseNumber, (err, responseData) => {
     if (err) {
       res.sendStatus(404);
     } else {
+      console.log('responseData for getHoursToComplete: ', responseData);
       res.status(202);
       res.send(responseData);
     }
@@ -31,10 +35,11 @@ app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
 // READ
 app.get('/api/syllabus/:courseNumber', (req, res) => {
   // console.log('GET /api/syllabus courseNumber: ', req.params.courseNumber);
-  db.syllabus(req.params.courseNumber, (err, responseData) => {
+  db.getSyllabus(req.params.courseNumber, (err, responseData) => {
     if (err) {
       res.sendStatus(404);
     } else {
+      console.log('responseData for getSyllabus: ', responseData);
       res.status(202);
       res.send(responseData);
     }
@@ -44,10 +49,11 @@ app.get('/api/syllabus/:courseNumber', (req, res) => {
 // CREATE
 app.post('/api/syllabus/:courseNumber', (req, res) => {
   // console.log('POST /api/syllabus courseNumber: ', req.params.courseNumber);
-  db.insertEntry(req.params.courseNumber, req.body, (err, success) => {
+  db.insertSyllabus(req.params.courseNumber, req.body, (err, success) => {
     if (err) {
       res.sendStatus(405);
     } else {
+      console.log('success for insertSyllabus: ', success);
       res.sendStatus(201);
     }
   })
@@ -60,6 +66,7 @@ app.put('/api/syllabus/:courseNumber', (req, res) => {
     if (err) {
       res.sendStatus(405);
     } else {
+      console.log('success for updateEntry: ', success);
       res.sendStatus(202)
     }
   });
@@ -72,6 +79,7 @@ app.delete('/api/syllabus/:courseNumber', (req, res) => {
     if (err) {
       res.sendStatus(404);
     } else {
+      console.log('success for deleteEntry: ', success);
       res.sendStatus(202);
     }
   });
