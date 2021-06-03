@@ -23,7 +23,8 @@ const insertSyllabus = (courseNumber, entry, cb) => {
 // GET | R: read
 const getHoursToComplete = (courseNumber, cb) => {
   pool.query(`SELECT syllabus FROM syllabi WHERE id = ${courseNumber}`, (err, result) => {
-    if (result.rows[0] === undefined) {
+    // if (result.rows[0] === undefined) {
+    if (result === undefined) {
       console.log('record doesn\'t exist');
       cb('record doesn\'t exist', null);
     } else if (err) {
@@ -38,7 +39,8 @@ const getHoursToComplete = (courseNumber, cb) => {
 
 const getSyllabus = (courseNumber, cb) => {
   pool.query(`SELECT syllabus FROM syllabi WHERE id = ${courseNumber}`, (err, result) => {
-    if (result.rows[0] === undefined) {
+    // if (result.rows[0] === undefined) {
+    if (result === undefined) {
       cb('record doesn\'t exist', null);
     } else if (err) {
       console.log('error inside of getSyllabus');
