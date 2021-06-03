@@ -1,0 +1,30 @@
+# Artillery
+config:
+  target: "http://localhost:3005/api"
+  phases:
+  - duration: 60
+    arrivalRate: 1
+    name: Warm up (1 virtual user every second for 60 seconds)
+  - duration: 60
+    arrivalRate: 10
+    name: Light load (10 virtual users every second for 60 seconds)
+  - duration: 60
+    arrivalRate: 100
+    name: Moderate load (100 virtual users every second for 60 seconds)
+  - duration: 60
+    arrivalRate: 1000
+    name: Heavy load (1000 virtual users every second for 60 seconds)
+  payload:
+    path: "../../stress-testing-data.csv"
+    fields:
+      - "id"
+      - "syllabusData"
+
+scenarios:
+- name: "Upload"
+  flow:
+    - post:
+        url: "/syllabus/{{ id }}"
+        json:
+          id: "{{ id }}"
+          syllabus: "{{ syllabusData }}"
