@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 app.use(express.static('./public'));
 app.use(cors());
 
+app.use(`/loaderio-c9d5a17d3777c205e1f0c5453b4f4e18.txt`, express.static(path.join(__dirname, `./loaderio-c9d5a17d3777c205e1f0c5453b4f4e18.txt`)));
+
 app.get('/:courseNumber', (req, res) => {
   // console.log('GET / courseNumber: ', req.params.courseNumber);
   res.sendFile(path.resolve('./public/index.html'));
@@ -87,11 +89,11 @@ app.delete('/api/syllabus/:courseNumber', (req, res) => {
   });
 });
 
-if (process.env.NODE_ENV.trim() !== 'test') {
+// if (process.env.NODE_ENV.trim() !== 'test') {
   app.listen(port, () => {
     console.log(`Syllabus service listening at http://localhost:${port}`);
   });
-}
+// }
 
 module.exports.app = app;
 module.exports.port = port;

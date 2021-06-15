@@ -70,7 +70,7 @@ module.exports = {
   reviewCount: 420,
   syllabusPort: '3005',
   // JAY PREVIOUS WAS USING 54.176.19.199
-  servicesURL: 'localhost',
+  servicesURL: '3.82.143.225',
   imagesURL: '54.176.19.199',
   imagesPort: 3006,
   reviewsURL: '3.139.47.159',
