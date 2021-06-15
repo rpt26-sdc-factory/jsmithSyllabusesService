@@ -2,6 +2,7 @@ require('newrelic');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mcache = require('memory-cache');
 const db = require('../db/postgres/index.js');
 const path = require('path');
 const cors = require('cors');
@@ -13,9 +14,27 @@ app.use(bodyParser.json());
 app.use(express.static('./public'));
 app.use(cors());
 
+const cacheOperation = (duration) => {
+  return (req, res, next) => {
+    let key = '__express__' + req.originalUrl || req.url
+    let cachedBody = mcache.get(key)
+    if (cachedBody) {
+      res.send(cachedBody)
+      return
+    } else {
+      res.sendResponse = res.send
+      res.send = (body) => {
+        mcache.put(key, body, duration * 1000);
+        res.sendResponse(body)
+      }
+      next()
+    }
+  }
+}
+
 app.use(`/loaderio-c9d5a17d3777c205e1f0c5453b4f4e18.txt`, express.static(path.join(__dirname, `./loaderio-c9d5a17d3777c205e1f0c5453b4f4e18.txt`)));
 
-app.get('/:courseNumber', (req, res) => {
+app.get('/:courseNumber', cacheOperation(120), (req, res) => {
   // console.log('GET / courseNumber: ', req.params.courseNumber);
   res.sendFile(path.resolve('./public/index.html'));
 });
@@ -23,7 +42,7 @@ app.get('/:courseNumber', (req, res) => {
 // hoursToComplete is processed by the app;
 // divided by 60 to get the displayed hoursToComplete
 // so technically this is minutesToComplete...
-app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
+app.get('/api/hoursToComplete/:courseNumber', cacheOperation(120),(req, res) => {
   // console.log('GET /api/hoursToComplete courseNumber: ', req.params.courseNumber);
   db.getHoursToComplete(req.params.courseNumber, (err, responseData) => {
     if (err) {
@@ -37,7 +56,7 @@ app.get('/api/hoursToComplete/:courseNumber', (req, res) => {
 });
 
 // READ
-app.get('/api/syllabus/:courseNumber', (req, res) => {
+app.get('/api/syllabus/:courseNumber', cacheOperation(120), (req, res) => {
   // console.log('GET /api/syllabus courseNumber: ', req.params.courseNumber);
   db.getSyllabus(req.params.courseNumber, (err, responseData) => {
     if (err) {
