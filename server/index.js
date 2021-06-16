@@ -17,20 +17,27 @@ app.use(cors());
 const cacheOperation = (duration) => {
   return (req, res, next) => {
     let key = '__express__' + req.originalUrl || req.url
-    let cachedBody = mcache.get(key)
+    let cachedBody = mcache.get(key);
     if (cachedBody) {
-      res.send(cachedBody)
-      return
+      res.send(cachedBody);
+      return;
     } else {
-      res.sendResponse = res.send
+      res.sendResponse = res.send;
       res.send = (body) => {
         mcache.put(key, body, duration * 1000);
-        res.sendResponse(body)
+        res.sendResponse(body);
       }
-      next()
+      next();
     }
   }
-}
+};
+
+app.get('/loader', () => {
+  // have an array of possible values
+
+  // need a visual that shows the cache "warming up"
+
+});
 
 app.use(`/loaderio-c9d5a17d3777c205e1f0c5453b4f4e18.txt`, express.static(path.join(__dirname, `./loaderio-c9d5a17d3777c205e1f0c5453b4f4e18.txt`)));
 
